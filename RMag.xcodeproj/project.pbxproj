@@ -1,0 +1,470 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		254EC6541790FCB800B7B2EB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 254EC6531790FCB800B7B2EB /* Foundation.framework */; };
+		254EC6561790FCB800B7B2EB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 254EC6551790FCB800B7B2EB /* CoreGraphics.framework */; };
+		254EC6581790FCB800B7B2EB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 254EC6571790FCB800B7B2EB /* UIKit.framework */; };
+		254EC65E1790FCB800B7B2EB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 254EC65C1790FCB800B7B2EB /* InfoPlist.strings */; };
+		254EC6601790FCB800B7B2EB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 254EC65F1790FCB800B7B2EB /* main.m */; };
+		254EC6641790FCB800B7B2EB /* RAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 254EC6631790FCB800B7B2EB /* RAppDelegate.m */; };
+		254EC6671790FCB800B7B2EB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 254EC6651790FCB800B7B2EB /* Main.storyboard */; };
+		254EC66A1790FCB800B7B2EB /* RViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 254EC6691790FCB800B7B2EB /* RViewController.m */; };
+		254EC66C1790FCB800B7B2EB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 254EC66B1790FCB800B7B2EB /* Images.xcassets */; };
+		254EC6731790FCB800B7B2EB /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 254EC6721790FCB800B7B2EB /* XCTest.framework */; };
+		254EC6741790FCB800B7B2EB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 254EC6531790FCB800B7B2EB /* Foundation.framework */; };
+		254EC6751790FCB800B7B2EB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 254EC6571790FCB800B7B2EB /* UIKit.framework */; };
+		254EC67D1790FCB800B7B2EB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 254EC67B1790FCB800B7B2EB /* InfoPlist.strings */; };
+		254EC67F1790FCB800B7B2EB /* RMagTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 254EC67E1790FCB800B7B2EB /* RMagTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		254EC6761790FCB800B7B2EB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 254EC6481790FCB800B7B2EB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 254EC64F1790FCB800B7B2EB;
+			remoteInfo = RMag;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		254EC6501790FCB800B7B2EB /* RMag.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RMag.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		254EC6531790FCB800B7B2EB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		254EC6551790FCB800B7B2EB /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		254EC6571790FCB800B7B2EB /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		254EC65B1790FCB800B7B2EB /* RMag-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "RMag-Info.plist"; sourceTree = "<group>"; };
+		254EC65D1790FCB800B7B2EB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		254EC65F1790FCB800B7B2EB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		254EC6611790FCB800B7B2EB /* RMag-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RMag-Prefix.pch"; sourceTree = "<group>"; };
+		254EC6621790FCB800B7B2EB /* RAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RAppDelegate.h; sourceTree = "<group>"; };
+		254EC6631790FCB800B7B2EB /* RAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RAppDelegate.m; sourceTree = "<group>"; };
+		254EC6661790FCB800B7B2EB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		254EC6681790FCB800B7B2EB /* RViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RViewController.h; sourceTree = "<group>"; };
+		254EC6691790FCB800B7B2EB /* RViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RViewController.m; sourceTree = "<group>"; };
+		254EC66B1790FCB800B7B2EB /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		254EC6711790FCB800B7B2EB /* RMagTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RMagTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		254EC6721790FCB800B7B2EB /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		254EC67A1790FCB800B7B2EB /* RMagTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "RMagTests-Info.plist"; sourceTree = "<group>"; };
+		254EC67C1790FCB800B7B2EB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		254EC67E1790FCB800B7B2EB /* RMagTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RMagTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		254EC64D1790FCB800B7B2EB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				254EC6561790FCB800B7B2EB /* CoreGraphics.framework in Frameworks */,
+				254EC6581790FCB800B7B2EB /* UIKit.framework in Frameworks */,
+				254EC6541790FCB800B7B2EB /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		254EC66E1790FCB800B7B2EB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				254EC6731790FCB800B7B2EB /* XCTest.framework in Frameworks */,
+				254EC6751790FCB800B7B2EB /* UIKit.framework in Frameworks */,
+				254EC6741790FCB800B7B2EB /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		254EC6471790FCB800B7B2EB = {
+			isa = PBXGroup;
+			children = (
+				254EC6591790FCB800B7B2EB /* RMag */,
+				254EC6781790FCB800B7B2EB /* RMagTests */,
+				254EC6521790FCB800B7B2EB /* Frameworks */,
+				254EC6511790FCB800B7B2EB /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		254EC6511790FCB800B7B2EB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				254EC6501790FCB800B7B2EB /* RMag.app */,
+				254EC6711790FCB800B7B2EB /* RMagTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		254EC6521790FCB800B7B2EB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				254EC6531790FCB800B7B2EB /* Foundation.framework */,
+				254EC6551790FCB800B7B2EB /* CoreGraphics.framework */,
+				254EC6571790FCB800B7B2EB /* UIKit.framework */,
+				254EC6721790FCB800B7B2EB /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		254EC6591790FCB800B7B2EB /* RMag */ = {
+			isa = PBXGroup;
+			children = (
+				254EC6621790FCB800B7B2EB /* RAppDelegate.h */,
+				254EC6631790FCB800B7B2EB /* RAppDelegate.m */,
+				254EC6651790FCB800B7B2EB /* Main.storyboard */,
+				254EC6681790FCB800B7B2EB /* RViewController.h */,
+				254EC6691790FCB800B7B2EB /* RViewController.m */,
+				254EC66B1790FCB800B7B2EB /* Images.xcassets */,
+				254EC65A1790FCB800B7B2EB /* Supporting Files */,
+			);
+			path = RMag;
+			sourceTree = "<group>";
+		};
+		254EC65A1790FCB800B7B2EB /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				254EC65B1790FCB800B7B2EB /* RMag-Info.plist */,
+				254EC65C1790FCB800B7B2EB /* InfoPlist.strings */,
+				254EC65F1790FCB800B7B2EB /* main.m */,
+				254EC6611790FCB800B7B2EB /* RMag-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		254EC6781790FCB800B7B2EB /* RMagTests */ = {
+			isa = PBXGroup;
+			children = (
+				254EC67E1790FCB800B7B2EB /* RMagTests.m */,
+				254EC6791790FCB800B7B2EB /* Supporting Files */,
+			);
+			path = RMagTests;
+			sourceTree = "<group>";
+		};
+		254EC6791790FCB800B7B2EB /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				254EC67A1790FCB800B7B2EB /* RMagTests-Info.plist */,
+				254EC67B1790FCB800B7B2EB /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		254EC64F1790FCB800B7B2EB /* RMag */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 254EC6821790FCB800B7B2EB /* Build configuration list for PBXNativeTarget "RMag" */;
+			buildPhases = (
+				254EC64C1790FCB800B7B2EB /* Sources */,
+				254EC64D1790FCB800B7B2EB /* Frameworks */,
+				254EC64E1790FCB800B7B2EB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RMag;
+			productName = RMag;
+			productReference = 254EC6501790FCB800B7B2EB /* RMag.app */;
+			productType = "com.apple.product-type.application";
+		};
+		254EC6701790FCB800B7B2EB /* RMagTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 254EC6851790FCB800B7B2EB /* Build configuration list for PBXNativeTarget "RMagTests" */;
+			buildPhases = (
+				254EC66D1790FCB800B7B2EB /* Sources */,
+				254EC66E1790FCB800B7B2EB /* Frameworks */,
+				254EC66F1790FCB800B7B2EB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				254EC6771790FCB800B7B2EB /* PBXTargetDependency */,
+			);
+			name = RMagTests;
+			productName = RMagTests;
+			productReference = 254EC6711790FCB800B7B2EB /* RMagTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		254EC6481790FCB800B7B2EB /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = R;
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = "Robin Qu";
+				TargetAttributes = {
+					254EC6701790FCB800B7B2EB = {
+						TestTargetID = 254EC64F1790FCB800B7B2EB;
+					};
+				};
+			};
+			buildConfigurationList = 254EC64B1790FCB800B7B2EB /* Build configuration list for PBXProject "RMag" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 254EC6471790FCB800B7B2EB;
+			productRefGroup = 254EC6511790FCB800B7B2EB /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				254EC64F1790FCB800B7B2EB /* RMag */,
+				254EC6701790FCB800B7B2EB /* RMagTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		254EC64E1790FCB800B7B2EB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				254EC66C1790FCB800B7B2EB /* Images.xcassets in Resources */,
+				254EC65E1790FCB800B7B2EB /* InfoPlist.strings in Resources */,
+				254EC6671790FCB800B7B2EB /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		254EC66F1790FCB800B7B2EB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				254EC67D1790FCB800B7B2EB /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		254EC64C1790FCB800B7B2EB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				254EC66A1790FCB800B7B2EB /* RViewController.m in Sources */,
+				254EC6601790FCB800B7B2EB /* main.m in Sources */,
+				254EC6641790FCB800B7B2EB /* RAppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		254EC66D1790FCB800B7B2EB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				254EC67F1790FCB800B7B2EB /* RMagTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		254EC6771790FCB800B7B2EB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 254EC64F1790FCB800B7B2EB /* RMag */;
+			targetProxy = 254EC6761790FCB800B7B2EB /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		254EC65C1790FCB800B7B2EB /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				254EC65D1790FCB800B7B2EB /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		254EC6651790FCB800B7B2EB /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				254EC6661790FCB800B7B2EB /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		254EC67B1790FCB800B7B2EB /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				254EC67C1790FCB800B7B2EB /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		254EC6801790FCB800B7B2EB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		254EC6811790FCB800B7B2EB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		254EC6831790FCB800B7B2EB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "RMag/RMag-Prefix.pch";
+				INFOPLIST_FILE = "RMag/RMag-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		254EC6841790FCB800B7B2EB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "RMag/RMag-Prefix.pch";
+				INFOPLIST_FILE = "RMag/RMag-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		254EC6861790FCB800B7B2EB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/RMag.app/RMag";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(SYSTEM_APPS_DIR)/Xcode5-DP3.app/Contents/Developer/Library/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "RMag/RMag-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "RMagTests/RMagTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		254EC6871790FCB800B7B2EB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/RMag.app/RMag";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(SYSTEM_APPS_DIR)/Xcode5-DP3.app/Contents/Developer/Library/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "RMag/RMag-Prefix.pch";
+				INFOPLIST_FILE = "RMagTests/RMagTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		254EC64B1790FCB800B7B2EB /* Build configuration list for PBXProject "RMag" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				254EC6801790FCB800B7B2EB /* Debug */,
+				254EC6811790FCB800B7B2EB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		254EC6821790FCB800B7B2EB /* Build configuration list for PBXNativeTarget "RMag" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				254EC6831790FCB800B7B2EB /* Debug */,
+				254EC6841790FCB800B7B2EB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		254EC6851790FCB800B7B2EB /* Build configuration list for PBXNativeTarget "RMagTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				254EC6861790FCB800B7B2EB /* Debug */,
+				254EC6871790FCB800B7B2EB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 254EC6481790FCB800B7B2EB /* Project object */;
+}
