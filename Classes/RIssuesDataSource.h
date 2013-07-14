@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class RIssue, RIssueManifest, RIssuesDataSource;
+@class RIssue, RIssueManifest, RIssuesDataSource, RAsset;
 
 
 @protocol RIssueDataSourceDelegate <NSObject>
@@ -25,11 +25,13 @@
 @property (nonatomic, retain) NSURL *publiserURL;
 @property (nonatomic, assign) id<RIssueDataSourceDelegate> delegate;
 
+//update
 - (id)initWithPublisherURL:(NSURL *)url;
 - (void)updateWithCallback:(void(^)(NSError *error))callback;
-//- (RIssue *)issueWithName:(NSString *)name;
+
+//Issues API
+- (RIssue *)issueWithUUID:(NSString *)uuid;
 - (void)downloadIssue:(RIssue *)issue;
-- (NSURL *)assetURLForIssues:(RIssue *)issues;
 
 
 @end

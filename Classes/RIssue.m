@@ -7,6 +7,7 @@
 //
 
 #import "RIssue.h"
+#import "RAsset.h"
 
 @implementation RIssue
 
@@ -23,11 +24,16 @@
 {
     self.uuid = object[@"uuid"];
     self.name = object[@"name"];
-    self.coverImage = [NSURL URLWithString:object[@"cover"]];
+    self.coverImageURL = [NSURL URLWithString:object[@"cover"]];
     self.assetURL = [NSURL URLWithString:object[@"asset"]];
     self.summary = object[@"summary"];
     self.utime = [NSDate dateWithTimeIntervalSince1970:[object[@"utime"] longLongValue]];
-    self.state = NSIssueStateInfoReady;
+    if (object[@"state"]) {
+        self.state = [object[@"state"] integerValue];
+    } else {
+        self.state = RIssueStateUnkown;
+    }
+    RAsset *asset = [RAsset assetForIssue:self];
 }
 
 - (NSDictionary *)dictionary
@@ -35,10 +41,11 @@
     return @{
              @"uuid": self.uuid,
              @"name": self.name,
-             @"cover": self.coverImage.absoluteString,
-             @"asset": self.assetURL.absoluteString,
+             @"cover": self.coverImageURL.absoluteString,
+             @"asset": self.asset.remoteURL.absoluteString,
              @"summary": self.summary,
-             @"utime": @([self.utime timeIntervalSince1970])
+             @"utime": @([self.utime timeIntervalSince1970]),
+             @"state": @(self.state)
              };
 }
 

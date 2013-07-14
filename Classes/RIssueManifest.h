@@ -11,8 +11,7 @@
 @interface RIssueManifest : NSObject
 
 @property (nonatomic, retain) NSDate *utime;
-@property (nonatomic, retain) NSSet *issues;
-@property (nonatomic, retain) NSNumber *sdkVersion;
+@property (nonatomic, retain) NSMutableSet *issues;
 
 @property (nonatomic,retain) NSURL *localURL;
 
@@ -22,5 +21,6 @@
 - (id)initWithURL:(NSURL *)url;
 - (void)setupWithObject:(id)object;
 - (void)synchronize;
+
 
 @end

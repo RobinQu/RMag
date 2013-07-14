@@ -11,20 +11,16 @@
 #import <AFNetworking/AFHTTPRequestOperation.h>
 #import "RIssueManifest.h"
 #import "RIssue.h"
+#import "RAsset.h"
 
-#define ISSUE_REVOKED_KEY @"revoked"
-#define ISSUE_DEFAULT_MAIN_FILENAME @"main"
+#define MANIFEST_REVOKED_ISSUES_KEY @"revoked"
+#define MANIFEST_NEW_ISSUES_KEY @"new"
+#define MANIFEST_UPDATED_ISSUES_KEY @"updated"
 
 
 //Sample manifest.json
 
-
-
 @interface RIssuesDataSource ()
-
-@property (nonatomic, retain) NSURL *assetDir;
-
-- (void)loadLocalIssuesData;
 
 @end
 
@@ -33,21 +29,6 @@
 + (void)initialize
 {
     [AFJSONRequestOperation addAcceptableContentTypes:[NSSet setWithObjects:@"text/plain", nil]];
-}
-
-- (id)init
-{
-    if ([super init]) {
-        NSFileManager *fm = [NSFileManager defaultManager];
-        self.assetDir = [[fm URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:Nil create:YES error:nil] URLByAppendingPathComponent:@"assets"];
-        if (![fm createDirectoryAtURL:self.assetDir withIntermediateDirectories:YES attributes:nil error:nil]) {
-            //TODO handle this fatal IO error
-            abort();
-        }
-        [self loadLocalIssuesData];
-        
-    }
-    return self;
 }
 
 - (id)initWithPublisherURL:(NSURL *)url
@@ -84,71 +65,105 @@
     }];
 }
 
-- (void)loadLocalIssuesData
-{
-    RIssueManifest *manifest = [RIssueManifest sharedManifest];
-    NSFileManager *fm = [NSFileManager defaultManager];
-    if (manifest) {//we have previously downloaded manifest, and possibly issue assets
-        NSURL *url = nil;
-        for (RIssue *issue in manifest.issues) {
-            url = [self.assetDir URLByAppendingPathComponent:issue.uuid isDirectory:YES];
-            if ([fm fileExistsAtPath:url.absoluteString]) {
-                issue.state = issue.state & NSIssueDownloaded;
-            }
-        }
-    }
-}
-
 - (void)processManifest:(NSDictionary *)JSON
 {
+    RIssueManifest *manifest = [RIssueManifest sharedManifest];
     if ([RIssueManifest hasDefaultManifest]) {//update local manifest
-        NSArray *issuesData = JSON[@"issues"];
-        RIssueManifest *manifest = [RIssueManifest sharedManifest];
-        for (id issueData in issuesData) {
-            //revoke issues
-            BOOL revoked = NO;
-            if (issueData[ISSUE_REVOKED_KEY]) {
-                revoked = [issueData[ISSUE_REVOKED_KEY] boolValue];
+        //revoke issues
+        NSArray *revokedIssuesData = JSON[MANIFEST_REVOKED_ISSUES_KEY];
+        if (revokedIssuesData && revokedIssuesData.count) {
+            [revokedIssuesData setValue:@(RIssueStateRevoked) forKey:@"state"];
+            for (NSString *uuid in revokedIssuesData) {
+                [self revokeIssueByUUID:uuid];
             }
-            if (revoked) {
-                NSURL *issueURL = [self.assetDir URLByAppendingPathComponent:issueData[@"uuid"] isDirectory:YES];
-                [[NSFileManager defaultManager] removeItemAtURL:issueURL error:nil];
-            }
-            //update manifest
         }
-        [manifest setupWithObject:JSON];
-        [manifest synchronize];
+        //update issues
+        NSArray *updatedIssuesData = JSON[MANIFEST_UPDATED_ISSUES_KEY];
+        if (updatedIssuesData && updatedIssuesData.count) {
+            [updatedIssuesData setValue:@(RIssueStateUpdateAvailable) forKey:@"state"];
+            for (NSDictionary *obj in updatedIssuesData) {
+                [self updateIssueWithObject:obj];
+            }
+            
+        }
+        //new issues
+        NSArray *newIssuesData = JSON[MANIFEST_NEW_ISSUES_KEY];
+        if (newIssuesData && newIssuesData.count) {
+            [newIssuesData setValue:@(RIssueStateNew) forKey:@"state"];
+            for (NSDictionary *obj in newIssuesData) {
+                [self newIssueWithObject:obj];
+            }
+        }
+        manifest.utime = [NSDate dateWithTimeIntervalSince1970:[JSON[@"utime"] integerValue]];
     } else {
-        [JSON writeToFile:[RIssueManifest pathForDefaultManifest] atomically:YES];
+        [JSON setValue:@(RIssueStateNew) forKeyPath:@"new.state"];
+        [manifest setupWithObject:@{
+                                    @"utime": JSON[@"utime"],
+                                    @"issues": JSON[@"issues"]
+                                    }];
+    }
+    [manifest synchronize];
+}
+
+
+- (void)revokeIssueByUUID:(NSString *)uuid
+{
+    NSAssert(uuid, @"shuld have uuid for issue");
+    RIssueManifest *manifest = [RIssueManifest sharedManifest];
+    RIssue *issue = [self issueWithUUID:uuid];
+    if (issue) {
+        issue.state = RIssueStateRevoked;
+        [manifest.issues removeObject:issue];
     }
 }
 
-//- (RIssue *)issueWithName:(NSString *)name
-//{
-//    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name == %@", name];
-//    [[[RIssueManifest sharedManifest] issues] filteredSetUsingPredicate:predicate];
-//}
+- (void)updateIssueWithObject:(NSDictionary *)object
+{
+    NSAssert(object[@"uuid"], @"shuld have uuid in issue data");
+    RIssue *issue = [self issueWithUUID:object[@"uuid"]];
+    [issue setupWithObject:object];
+    issue.state = RIssueStateUpdateAvailable;
+}
+
+- (void)newIssueWithObject:(NSDictionary *)object
+{
+    NSAssert(object[@"uuid"], @"shuld have uuid in issue data");
+    RIssue *issue = [[RIssue alloc] initWithObject:object];
+    [issue setupWithObject:object];
+    issue.state = RIssueStateNew;
+    [[[RIssueManifest sharedManifest] issues] addObject:issue];
+}
+
+- (RIssue *)issueWithUUID:(NSString *)uuid
+{
+    RIssueManifest *manifest = [RIssueManifest sharedManifest];
+    NSSet *issues = manifest.issues;
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"uuid = %@", uuid];
+    NSSet* wanted = [issues filteredSetUsingPredicate:predicate];
+    if (wanted.count) {
+        return wanted.anyObject;
+    }
+    return nil;
+}
 
 - (void)downloadIssue:(RIssue *)issue
 {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSURLRequest *urlRequest = [NSURLRequest requestWithURL:issue.assetURL];
-        NSFileManager *fm = [NSFileManager defaultManager];
-        NSURL *issueDir = [self.assetDir URLByAppendingPathComponent: issue.uuid isDirectory:YES];
-        if (![fm createDirectoryAtURL:issueDir withIntermediateDirectories:YES attributes:nil error:nil]) {
-            abort();
-        }
-        
+        NSURLRequest *urlRequest = [NSURLRequest requestWithURL:issue.asset.remoteURL];
+        RAsset *asset = [RAsset assetForIssue:issue];
+        asset.state = RAssetStateDownloading;
         NSString *mainFileName = [NSString stringWithFormat:@"%f", [issue.utime timeIntervalSince1970]];
-        NSOutputStream *output = [NSOutputStream outputStreamWithURL:[issueDir URLByAppendingPathComponent:mainFileName] append:NO];
+        NSOutputStream *output = [NSOutputStream outputStreamWithURL:[asset.localURL URLByAppendingPathComponent:mainFileName] append:NO];
         AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:urlRequest];
         operation.outputStream = output;
         [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
             dispatch_async(dispatch_get_main_queue(), ^{
+                asset.state = RAssetStateNormal;
                 [self.delegate dataSource:self downloadDidCompleteForIssue:issue];
             });
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             dispatch_async(dispatch_get_main_queue(), ^{
+                asset.state = RAssetStateCorrupted;
                 [self.delegate dataSource:self downloadDidFailForIssue:issue withError:error];
             });
         }];
@@ -158,5 +173,6 @@
         [operation start];
     });
 }
+
 
 @end

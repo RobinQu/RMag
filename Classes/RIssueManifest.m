@@ -26,12 +26,12 @@
 {
     NSString *fp = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0] stringByAppendingPathComponent:@"manifest.json"];
     static RIssueManifest *manifest = nil;
-    if ([[NSFileManager defaultManager] fileExistsAtPath:fp]) {
-        static dispatch_once_t onceToken;
-        dispatch_once(&onceToken, ^{
-            manifest = [[RIssueManifest alloc] initWithURL:[NSURL URLWithString:fp]];
-        });
-    }
+//    if ([[NSFileManager defaultManager] fileExistsAtPath:fp]) {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        manifest = [[RIssueManifest alloc] initWithURL:[NSURL URLWithString:fp]];
+    });
+//    }
     return manifest;
 }
 

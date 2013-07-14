@@ -8,22 +8,23 @@
 
 #import <Foundation/Foundation.h>
 
+@class RAsset;
+
 typedef NS_OPTIONS(NSInteger, RIssueState) {
-    NSIssueStateNone = 0,
-    NSIssueStateInfoReady = 1 << 0,
-    NSIssueDownloading = 1 << 1,
-    NSIssueDownloaded = 1 << 2,
-    NSIssueUpdateAvailable = 1 << 3,
-    NSIssueRevoked = 1 << 4,
-    NSIssueValidating = 1 << 5
+    RIssueStateUnkown = 0,
+    RIssueStateNormal = 1 << 0,
+    RIssueStateNew = 1 << 1,
+    RIssueStateUpdateAvailable = 1 << 2,
+    RIssueStateRevoked = 1 << 3
 };
 
 @interface RIssue : NSObject
 
 @property (nonatomic, retain) NSString *uuid;
 @property (nonatomic, retain) NSString *name;;
-@property (nonatomic, retain) NSURL *coverImage;
+@property (nonatomic, retain) NSURL *coverImageURL;
 @property (nonatomic, retain) NSURL *assetURL;
+@property (nonatomic, retain) RAsset *asset;
 @property (nonatomic, retain) NSString *summary;
 @property (nonatomic, retain) NSDate *utime;
 @property (nonatomic, assign) RIssueState state;

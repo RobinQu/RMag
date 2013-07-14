@@ -35,6 +35,7 @@
 		2597A5A7179199BE0029F7E4 /* RIssueManifest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2597A5A3179199BE0029F7E4 /* RIssueManifest.m */; };
 		2597A5A8179199BE0029F7E4 /* RIssuesDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2597A5A5179199BE0029F7E4 /* RIssuesDataSource.m */; };
 		2597A5AB179199C80029F7E4 /* RIssuesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2597A5AA179199C80029F7E4 /* RIssuesViewController.m */; };
+		25BBFDB71792595A00D3D94D /* RAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = 25BBFDB61792595A00D3D94D /* RAsset.m */; };
 		2CD63D8CB2D4454588356A9F /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D69DFDC25214010A3E82AF6 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -86,6 +87,8 @@
 		2597A5A5179199BE0029F7E4 /* RIssuesDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RIssuesDataSource.m; sourceTree = "<group>"; };
 		2597A5A9179199C80029F7E4 /* RIssuesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RIssuesViewController.h; sourceTree = "<group>"; };
 		2597A5AA179199C80029F7E4 /* RIssuesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RIssuesViewController.m; sourceTree = "<group>"; };
+		25BBFDB51792595A00D3D94D /* RAsset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RAsset.h; sourceTree = "<group>"; };
+		25BBFDB61792595A00D3D94D /* RAsset.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RAsset.m; sourceTree = "<group>"; };
 		4D69DFDC25214010A3E82AF6 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C755F7DD260E40B494CBBE2F /* Pods/Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -221,6 +224,8 @@
 				2597A5A3179199BE0029F7E4 /* RIssueManifest.m */,
 				2597A5A4179199BE0029F7E4 /* RIssuesDataSource.h */,
 				2597A5A5179199BE0029F7E4 /* RIssuesDataSource.m */,
+				25BBFDB51792595A00D3D94D /* RAsset.h */,
+				25BBFDB61792595A00D3D94D /* RAsset.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -376,6 +381,7 @@
 				254EC6601790FCB800B7B2EB /* main.m in Sources */,
 				2597A5A6179199BE0029F7E4 /* RIssue.m in Sources */,
 				254EC6641790FCB800B7B2EB /* RAppDelegate.m in Sources */,
+				25BBFDB71792595A00D3D94D /* RAsset.m in Sources */,
 				2597A5A7179199BE0029F7E4 /* RIssueManifest.m in Sources */,
 				2597A5A8179199BE0029F7E4 /* RIssuesDataSource.m in Sources */,
 			);
