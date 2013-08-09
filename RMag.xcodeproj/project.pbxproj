@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		252EF7EF17996CE000FB10B8 /* RTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 252EF7EE17996CE000FB10B8 /* RTestCase.m */; };
+		252EF7F217996CFE00FB10B8 /* RDatasourceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 252EF7F117996CFE00FB10B8 /* RDatasourceTest.m */; };
 		254EC6541790FCB800B7B2EB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 254EC6531790FCB800B7B2EB /* Foundation.framework */; };
 		254EC6561790FCB800B7B2EB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 254EC6551790FCB800B7B2EB /* CoreGraphics.framework */; };
 		254EC6581790FCB800B7B2EB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 254EC6571790FCB800B7B2EB /* UIKit.framework */; };
@@ -20,7 +22,9 @@
 		254EC6741790FCB800B7B2EB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 254EC6531790FCB800B7B2EB /* Foundation.framework */; };
 		254EC6751790FCB800B7B2EB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 254EC6571790FCB800B7B2EB /* UIKit.framework */; };
 		254EC67D1790FCB800B7B2EB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 254EC67B1790FCB800B7B2EB /* InfoPlist.strings */; };
-		254EC67F1790FCB800B7B2EB /* RMagTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 254EC67E1790FCB800B7B2EB /* RMagTests.m */; };
+		2564F24417B4AA5300EC8E4B /* RPDFReaderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2564F24317B4AA5300EC8E4B /* RPDFReaderViewController.m */; };
+		2564F24717B4B0AD00EC8E4B /* RPDFPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2564F24617B4B0AD00EC8E4B /* RPDFPageView.m */; };
+		2564F24A17B4B77600EC8E4B /* RPDFPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2564F24917B4B77600EC8E4B /* RPDFPageViewController.m */; };
 		2597A590179150F60029F7E4 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 2597A586179150F60029F7E4 /* Icon-72.png */; };
 		2597A591179150F60029F7E4 /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2597A587179150F60029F7E4 /* Icon-72@2x.png */; };
 		2597A592179150F60029F7E4 /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 2597A588179150F60029F7E4 /* Icon-Small-50.png */; };
@@ -50,6 +54,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		252EF7ED17996CE000FB10B8 /* RTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTestCase.h; sourceTree = "<group>"; };
+		252EF7EE17996CE000FB10B8 /* RTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTestCase.m; sourceTree = "<group>"; };
+		252EF7F117996CFE00FB10B8 /* RDatasourceTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDatasourceTest.m; sourceTree = "<group>"; };
 		254EC6501790FCB800B7B2EB /* RMag.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RMag.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		254EC6531790FCB800B7B2EB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		254EC6551790FCB800B7B2EB /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -68,7 +75,12 @@
 		254EC6721790FCB800B7B2EB /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		254EC67A1790FCB800B7B2EB /* RMagTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "RMagTests-Info.plist"; sourceTree = "<group>"; };
 		254EC67C1790FCB800B7B2EB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		254EC67E1790FCB800B7B2EB /* RMagTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RMagTests.m; sourceTree = "<group>"; };
+		2564F24217B4AA5300EC8E4B /* RPDFReaderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPDFReaderViewController.h; sourceTree = "<group>"; };
+		2564F24317B4AA5300EC8E4B /* RPDFReaderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPDFReaderViewController.m; sourceTree = "<group>"; };
+		2564F24517B4B0AD00EC8E4B /* RPDFPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPDFPageView.h; sourceTree = "<group>"; };
+		2564F24617B4B0AD00EC8E4B /* RPDFPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPDFPageView.m; sourceTree = "<group>"; };
+		2564F24817B4B77600EC8E4B /* RPDFPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPDFPageViewController.h; sourceTree = "<group>"; };
+		2564F24917B4B77600EC8E4B /* RPDFPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPDFPageViewController.m; sourceTree = "<group>"; };
 		2597A586179150F60029F7E4 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
 		2597A587179150F60029F7E4 /* Icon-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72@2x.png"; sourceTree = "<group>"; };
 		2597A588179150F60029F7E4 /* Icon-Small-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small-50.png"; sourceTree = "<group>"; };
@@ -182,8 +194,10 @@
 		254EC6781790FCB800B7B2EB /* RMagTests */ = {
 			isa = PBXGroup;
 			children = (
-				254EC67E1790FCB800B7B2EB /* RMagTests.m */,
+				252EF7ED17996CE000FB10B8 /* RTestCase.h */,
+				252EF7EE17996CE000FB10B8 /* RTestCase.m */,
 				254EC6791790FCB800B7B2EB /* Supporting Files */,
+				252EF7F117996CFE00FB10B8 /* RDatasourceTest.m */,
 			);
 			path = RMagTests;
 			sourceTree = "<group>";
@@ -195,6 +209,34 @@
 				254EC67B1790FCB800B7B2EB /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		2564F23F17B4A9C500EC8E4B /* ReaderKit */ = {
+			isa = PBXGroup;
+			children = (
+				2564F24217B4AA5300EC8E4B /* RPDFReaderViewController.h */,
+				2564F24317B4AA5300EC8E4B /* RPDFReaderViewController.m */,
+				2564F24517B4B0AD00EC8E4B /* RPDFPageView.h */,
+				2564F24617B4B0AD00EC8E4B /* RPDFPageView.m */,
+				2564F24817B4B77600EC8E4B /* RPDFPageViewController.h */,
+				2564F24917B4B77600EC8E4B /* RPDFPageViewController.m */,
+			);
+			name = ReaderKit;
+			sourceTree = "<group>";
+		};
+		2564F24017B4A9CB00EC8E4B /* IssuesKit */ = {
+			isa = PBXGroup;
+			children = (
+				2597A5A0179199BE0029F7E4 /* RIssue.h */,
+				2597A5A1179199BE0029F7E4 /* RIssue.m */,
+				2597A5A2179199BE0029F7E4 /* RIssueManifest.h */,
+				2597A5A3179199BE0029F7E4 /* RIssueManifest.m */,
+				2597A5A4179199BE0029F7E4 /* RIssuesDataSource.h */,
+				2597A5A5179199BE0029F7E4 /* RIssuesDataSource.m */,
+				25BBFDB51792595A00D3D94D /* RAsset.h */,
+				25BBFDB61792595A00D3D94D /* RAsset.m */,
+			);
+			name = IssuesKit;
 			sourceTree = "<group>";
 		};
 		2597A585179150F60029F7E4 /* icons */ = {
@@ -218,14 +260,8 @@
 		2597A59F179199BE0029F7E4 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				2597A5A0179199BE0029F7E4 /* RIssue.h */,
-				2597A5A1179199BE0029F7E4 /* RIssue.m */,
-				2597A5A2179199BE0029F7E4 /* RIssueManifest.h */,
-				2597A5A3179199BE0029F7E4 /* RIssueManifest.m */,
-				2597A5A4179199BE0029F7E4 /* RIssuesDataSource.h */,
-				2597A5A5179199BE0029F7E4 /* RIssuesDataSource.m */,
-				25BBFDB51792595A00D3D94D /* RAsset.h */,
-				25BBFDB61792595A00D3D94D /* RAsset.m */,
+				2564F24017B4A9CB00EC8E4B /* IssuesKit */,
+				2564F23F17B4A9C500EC8E4B /* ReaderKit */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -377,6 +413,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				2597A5AB179199C80029F7E4 /* RIssuesViewController.m in Sources */,
+				2564F24417B4AA5300EC8E4B /* RPDFReaderViewController.m in Sources */,
+				2564F24A17B4B77600EC8E4B /* RPDFPageViewController.m in Sources */,
 				254EC66A1790FCB800B7B2EB /* RViewController.m in Sources */,
 				254EC6601790FCB800B7B2EB /* main.m in Sources */,
 				2597A5A6179199BE0029F7E4 /* RIssue.m in Sources */,
@@ -384,6 +422,7 @@
 				25BBFDB71792595A00D3D94D /* RAsset.m in Sources */,
 				2597A5A7179199BE0029F7E4 /* RIssueManifest.m in Sources */,
 				2597A5A8179199BE0029F7E4 /* RIssuesDataSource.m in Sources */,
+				2564F24717B4B0AD00EC8E4B /* RPDFPageView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -391,7 +430,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				254EC67F1790FCB800B7B2EB /* RMagTests.m in Sources */,
+				252EF7EF17996CE000FB10B8 /* RTestCase.m in Sources */,
+				252EF7F217996CFE00FB10B8 /* RDatasourceTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

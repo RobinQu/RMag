@@ -26,7 +26,7 @@ typedef NS_OPTIONS(NSInteger, RIssueState) {
 @property (nonatomic, retain) NSURL *assetURL;
 @property (nonatomic, retain) RAsset *asset;
 @property (nonatomic, retain) NSString *summary;
-@property (nonatomic, retain) NSDate *utime;
+@property (nonatomic, retain) NSDate *mtime;
 @property (nonatomic, assign) RIssueState state;
 
 - (id)initWithObject:(id)object;

@@ -27,13 +27,13 @@
     self.coverImageURL = [NSURL URLWithString:object[@"cover"]];
     self.assetURL = [NSURL URLWithString:object[@"asset"]];
     self.summary = object[@"summary"];
-    self.utime = [NSDate dateWithTimeIntervalSince1970:[object[@"utime"] longLongValue]];
+    self.mtime = [NSDate dateWithTimeIntervalSince1970:[object[@"mtime"] longLongValue]];
     if (object[@"state"]) {
         self.state = [object[@"state"] integerValue];
     } else {
         self.state = RIssueStateUnkown;
     }
-    RAsset *asset = [RAsset assetForIssue:self];
+    self.asset = [RAsset assetForIssue:self];
 }
 
 - (NSDictionary *)dictionary
@@ -44,7 +44,7 @@
              @"cover": self.coverImageURL.absoluteString,
              @"asset": self.asset.remoteURL.absoluteString,
              @"summary": self.summary,
-             @"utime": @([self.utime timeIntervalSince1970]),
+             @"mtime": @([self.mtime timeIntervalSince1970]),
              @"state": @(self.state)
              };
 }

@@ -68,40 +68,32 @@
 - (void)processManifest:(NSDictionary *)JSON
 {
     RIssueManifest *manifest = [RIssueManifest sharedManifest];
-    if ([RIssueManifest hasDefaultManifest]) {//update local manifest
-        //revoke issues
-        NSArray *revokedIssuesData = JSON[MANIFEST_REVOKED_ISSUES_KEY];
-        if (revokedIssuesData && revokedIssuesData.count) {
-            [revokedIssuesData setValue:@(RIssueStateRevoked) forKey:@"state"];
-            for (NSString *uuid in revokedIssuesData) {
-                [self revokeIssueByUUID:uuid];
-            }
+    //revoke issues
+    NSArray *revokedIssuesData = JSON[MANIFEST_REVOKED_ISSUES_KEY];
+    if (revokedIssuesData && revokedIssuesData.count) {
+        [revokedIssuesData setValue:@(RIssueStateRevoked) forKey:@"state"];
+        for (NSString *uuid in revokedIssuesData) {
+            [self revokeIssueByUUID:uuid];
         }
-        //update issues
-        NSArray *updatedIssuesData = JSON[MANIFEST_UPDATED_ISSUES_KEY];
-        if (updatedIssuesData && updatedIssuesData.count) {
-            [updatedIssuesData setValue:@(RIssueStateUpdateAvailable) forKey:@"state"];
-            for (NSDictionary *obj in updatedIssuesData) {
-                [self updateIssueWithObject:obj];
-            }
-            
-        }
-        //new issues
-        NSArray *newIssuesData = JSON[MANIFEST_NEW_ISSUES_KEY];
-        if (newIssuesData && newIssuesData.count) {
-            [newIssuesData setValue:@(RIssueStateNew) forKey:@"state"];
-            for (NSDictionary *obj in newIssuesData) {
-                [self newIssueWithObject:obj];
-            }
-        }
-        manifest.utime = [NSDate dateWithTimeIntervalSince1970:[JSON[@"utime"] integerValue]];
-    } else {
-        [JSON setValue:@(RIssueStateNew) forKeyPath:@"new.state"];
-        [manifest setupWithObject:@{
-                                    @"utime": JSON[@"utime"],
-                                    @"issues": JSON[@"issues"]
-                                    }];
     }
+    //update issues
+    NSArray *updatedIssuesData = JSON[MANIFEST_UPDATED_ISSUES_KEY];
+    if (updatedIssuesData && updatedIssuesData.count) {
+        [updatedIssuesData setValue:@(RIssueStateUpdateAvailable) forKey:@"state"];
+        for (NSDictionary *obj in updatedIssuesData) {
+            [self updateIssueWithObject:obj];
+        }
+        
+    }
+    //new issues
+    NSArray *newIssuesData = JSON[MANIFEST_NEW_ISSUES_KEY];
+    if (newIssuesData && newIssuesData.count) {
+        [newIssuesData setValue:@(RIssueStateNew) forKey:@"state"];
+        for (NSDictionary *obj in newIssuesData) {
+            [self newIssueWithObject:obj];
+        }
+    }
+    manifest.utime = [NSDate dateWithTimeIntervalSince1970:[JSON[@"utime"] integerValue]];
     [manifest synchronize];
 }
 
@@ -152,7 +144,7 @@
         NSURLRequest *urlRequest = [NSURLRequest requestWithURL:issue.asset.remoteURL];
         RAsset *asset = [RAsset assetForIssue:issue];
         asset.state = RAssetStateDownloading;
-        NSString *mainFileName = [NSString stringWithFormat:@"%f", [issue.utime timeIntervalSince1970]];
+        NSString *mainFileName = [NSString stringWithFormat:@"%f", [issue.mtime timeIntervalSince1970]];
         NSOutputStream *output = [NSOutputStream outputStreamWithURL:[asset.localURL URLByAppendingPathComponent:mainFileName] append:NO];
         AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:urlRequest];
         operation.outputStream = output;
