@@ -1,18 +1,21 @@
 Pod::Spec.new do |s|
   s.name         = "RMag"
-  s.version      = "0.0.1"
+  s.version      = "0.0.2"
   s.summary      = "Digital magazine publishing solution."
   s.description  = <<-DESC
                     RMag client toolkit for building magazine-like application in iOS
                     
                     * Magazine distribution
-                    * PDF reader 
+                    * PDF reader
+                    * HTML-archive reader
+                    
+                    Not for production use at present. Still in development.
                    DESC
   s.homepage     = "http://github.com/RobinQu/RMag"
-  s.license      = 'MIT'
+  s.license      = { :type => 'MIT', :file => 'LICENSE'}
 
   s.author       = { "RobinQu" => "robinqu@gmail.com" }
-  s.source       = { :git => "http://github.com/RobinQu/RMag.git", :tag => "#{s.version}" }
+  s.source       = { :git => "https://github.com/RobinQu/RMag.git", :tag => "#{s.version}" }
   s.platform     = :ios, '5.0'
 
   s.source_files = 'Classes', 'Classes/**/*.{h,m}'
