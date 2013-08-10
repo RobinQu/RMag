@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "RMag"
-  s.version      = "0.0.2"
+  s.version      = "0.0.3"
   s.summary      = "Digital magazine publishing solution."
   s.description  = <<-DESC
                     RMag client toolkit for building magazine-like application in iOS
