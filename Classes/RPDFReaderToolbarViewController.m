@@ -8,6 +8,7 @@
 
 #import "RPDFReaderToolbarViewController.h"
 #import "RPDFPageViewController.h"
+#import "RPDFToolbarButton.h"
 #import <StackBluriOS/UIImage+StackBlur.h>
 
 static const CGFloat kTransitionInterval = .3f;
@@ -18,6 +19,9 @@ static const CGFloat kImageBlurRadius = 30.0f;
 + (id)sharedInstance;
 
 @property (nonatomic, retain) UIImageView *backgroundView;
+@property (nonatomic, retain) RPDFToolbarButton *backButton;
+@property (nonatomic, retain) RPDFToolbarButton *tocButton;
+@property (nonatomic, retain) RPDFToolbarButton *hintButton;
 
 @end
 
@@ -82,7 +86,15 @@ static const CGFloat kImageBlurRadius = 30.0f;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapOnBackgroundView)];
     [self.view addGestureRecognizer:tap];
     
-
+    self.backButton = [RPDFToolbarButton backButton];
+    [self.backButton setPosition:CGPointMake(36, 185)];
+    [self.view addSubview:self.backButton];
+    self.tocButton = [RPDFToolbarButton tocButton];
+    [self.tocButton setPosition:CGPointMake(125, 185)];
+    [self.view addSubview:self.tocButton];
+    self.hintButton = [RPDFToolbarButton hintButton];
+    [self.hintButton setPosition:CGPointMake(225, 185)];
+    [self.view addSubview:self.hintButton];
 }
 
 //- (void)viewWillAppear:(BOOL)animated

@@ -20,9 +20,10 @@ Pod::Spec.new do |s|
 
   s.source_files = 'Classes', 'Classes/**/*.{h,m}'
   s.exclude_files = 'Classes/Exclude'
-
+  s.resources = ['Images/*.png']
+  
   s.requires_arc = true
-
+  
   s.dependency 'AFNetworking', '~> 1.3.1'
   s.dependency 'PSTCollectionView', "~> 1.0.0"
   s.dependency 'DTFoundation',  '~> 1.4.4'

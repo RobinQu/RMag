@@ -41,6 +41,13 @@
 		2597A5A8179199BE0029F7E4 /* RIssuesDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2597A5A5179199BE0029F7E4 /* RIssuesDataSource.m */; };
 		2597A5AB179199C80029F7E4 /* RIssuesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2597A5AA179199C80029F7E4 /* RIssuesViewController.m */; };
 		25BBFDB71792595A00D3D94D /* RAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = 25BBFDB61792595A00D3D94D /* RAsset.m */; };
+		25FEA5BF17B658C30076EE1B /* RPDFToolbarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 25FEA5BE17B658C30076EE1B /* RPDFToolbarButton.m */; };
+		25FEA5F017B6640D0076EE1B /* reader-back-icon-active@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 25FEA5EA17B6640D0076EE1B /* reader-back-icon-active@2x.png */; };
+		25FEA5F117B6640D0076EE1B /* reader-back-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 25FEA5EB17B6640D0076EE1B /* reader-back-icon@2x.png */; };
+		25FEA5F217B6640D0076EE1B /* reader-bubble-icon-active@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 25FEA5EC17B6640D0076EE1B /* reader-bubble-icon-active@2x.png */; };
+		25FEA5F317B6640D0076EE1B /* reader-bubble-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 25FEA5ED17B6640D0076EE1B /* reader-bubble-icon@2x.png */; };
+		25FEA5F417B6640D0076EE1B /* reader-meue-icon-active@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 25FEA5EE17B6640D0076EE1B /* reader-meue-icon-active@2x.png */; };
+		25FEA5F517B6640D0076EE1B /* reader-meue-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 25FEA5EF17B6640D0076EE1B /* reader-meue-icon@2x.png */; };
 		2CD63D8CB2D4454588356A9F /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D69DFDC25214010A3E82AF6 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -104,6 +111,15 @@
 		2597A5AA179199C80029F7E4 /* RIssuesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RIssuesViewController.m; sourceTree = "<group>"; };
 		25BBFDB51792595A00D3D94D /* RAsset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RAsset.h; sourceTree = "<group>"; };
 		25BBFDB61792595A00D3D94D /* RAsset.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RAsset.m; sourceTree = "<group>"; };
+		25FEA5BD17B658C30076EE1B /* RPDFToolbarButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPDFToolbarButton.h; sourceTree = "<group>"; };
+		25FEA5BE17B658C30076EE1B /* RPDFToolbarButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPDFToolbarButton.m; sourceTree = "<group>"; };
+		25FEA5D617B65D340076EE1B /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		25FEA5EA17B6640D0076EE1B /* reader-back-icon-active@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "reader-back-icon-active@2x.png"; sourceTree = "<group>"; };
+		25FEA5EB17B6640D0076EE1B /* reader-back-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "reader-back-icon@2x.png"; sourceTree = "<group>"; };
+		25FEA5EC17B6640D0076EE1B /* reader-bubble-icon-active@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "reader-bubble-icon-active@2x.png"; sourceTree = "<group>"; };
+		25FEA5ED17B6640D0076EE1B /* reader-bubble-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "reader-bubble-icon@2x.png"; sourceTree = "<group>"; };
+		25FEA5EE17B6640D0076EE1B /* reader-meue-icon-active@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "reader-meue-icon-active@2x.png"; sourceTree = "<group>"; };
+		25FEA5EF17B6640D0076EE1B /* reader-meue-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "reader-meue-icon@2x.png"; sourceTree = "<group>"; };
 		4D69DFDC25214010A3E82AF6 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C755F7DD260E40B494CBBE2F /* Pods/Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -162,6 +178,7 @@
 				254EC6571790FCB800B7B2EB /* UIKit.framework */,
 				254EC6721790FCB800B7B2EB /* XCTest.framework */,
 				4D69DFDC25214010A3E82AF6 /* libPods.a */,
+				25FEA5D617B65D340076EE1B /* CoreFoundation.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -185,6 +202,7 @@
 		254EC65A1790FCB800B7B2EB /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				25FEA5E917B663E10076EE1B /* images */,
 				2597A585179150F60029F7E4 /* icons */,
 				254EC65B1790FCB800B7B2EB /* RMag-Info.plist */,
 				254EC65C1790FCB800B7B2EB /* InfoPlist.strings */,
@@ -275,8 +293,23 @@
 			children = (
 				2523213E17B5103E00A2950B /* RPDFReaderToolbarViewController.h */,
 				2523213F17B5103E00A2950B /* RPDFReaderToolbarViewController.m */,
+				25FEA5BD17B658C30076EE1B /* RPDFToolbarButton.h */,
+				25FEA5BE17B658C30076EE1B /* RPDFToolbarButton.m */,
 			);
 			name = Toolbar;
+			sourceTree = "<group>";
+		};
+		25FEA5E917B663E10076EE1B /* images */ = {
+			isa = PBXGroup;
+			children = (
+				25FEA5EA17B6640D0076EE1B /* reader-back-icon-active@2x.png */,
+				25FEA5EB17B6640D0076EE1B /* reader-back-icon@2x.png */,
+				25FEA5EC17B6640D0076EE1B /* reader-bubble-icon-active@2x.png */,
+				25FEA5ED17B6640D0076EE1B /* reader-bubble-icon@2x.png */,
+				25FEA5EE17B6640D0076EE1B /* reader-meue-icon-active@2x.png */,
+				25FEA5EF17B6640D0076EE1B /* reader-meue-icon@2x.png */,
+			);
+			name = images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -361,13 +394,19 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				25FEA5F217B6640D0076EE1B /* reader-bubble-icon-active@2x.png in Resources */,
 				2597A594179150F60029F7E4 /* Icon-Small.png in Resources */,
+				25FEA5F117B6640D0076EE1B /* reader-back-icon@2x.png in Resources */,
 				254EC66C1790FCB800B7B2EB /* Images.xcassets in Resources */,
+				25FEA5F417B6640D0076EE1B /* reader-meue-icon-active@2x.png in Resources */,
 				2597A596179150F60029F7E4 /* Icon.png in Resources */,
 				2597A590179150F60029F7E4 /* Icon-72.png in Resources */,
+				25FEA5F517B6640D0076EE1B /* reader-meue-icon@2x.png in Resources */,
 				2597A595179150F60029F7E4 /* Icon-Small@2x.png in Resources */,
+				25FEA5F317B6640D0076EE1B /* reader-bubble-icon@2x.png in Resources */,
 				2597A597179150F60029F7E4 /* Icon@2x.png in Resources */,
 				2597A598179150F60029F7E4 /* iTunesArtwork.png in Resources */,
+				25FEA5F017B6640D0076EE1B /* reader-back-icon-active@2x.png in Resources */,
 				2597A593179150F60029F7E4 /* Icon-Small-50@2x.png in Resources */,
 				2597A591179150F60029F7E4 /* Icon-72@2x.png in Resources */,
 				2597A592179150F60029F7E4 /* Icon-Small-50.png in Resources */,
@@ -434,6 +473,7 @@
 				254EC6641790FCB800B7B2EB /* RAppDelegate.m in Sources */,
 				25BBFDB71792595A00D3D94D /* RAsset.m in Sources */,
 				2523214017B5103E00A2950B /* RPDFReaderToolbarViewController.m in Sources */,
+				25FEA5BF17B658C30076EE1B /* RPDFToolbarButton.m in Sources */,
 				2597A5A7179199BE0029F7E4 /* RIssueManifest.m in Sources */,
 				2597A5A8179199BE0029F7E4 /* RIssuesDataSource.m in Sources */,
 				2564F24717B4B0AD00EC8E4B /* RPDFPageView.m in Sources */,

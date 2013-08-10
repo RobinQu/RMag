@@ -110,7 +110,7 @@
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController
 {
     RPDFPageViewController *theViewController = (RPDFPageViewController *)viewController;
-    NSUInteger previousPageNumber  = theViewController.pageNumber;
+    NSUInteger previousPageNumber  = theViewController.pageNumber - 1;
     if (previousPageNumber > self.numberOfPages) {
         return NULL;
     }

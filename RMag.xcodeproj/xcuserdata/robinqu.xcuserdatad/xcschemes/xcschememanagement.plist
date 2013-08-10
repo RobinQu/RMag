@@ -9,6 +9,11 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>RMagResource.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>9</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
@@ -18,6 +23,11 @@
 			<true/>
 		</dict>
 		<key>254EC6701790FCB800B7B2EB</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>25FEA5D417B65D340076EE1B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
