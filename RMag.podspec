@@ -27,4 +27,5 @@ Pod::Spec.new do |s|
   s.dependency 'PSTCollectionView', "~> 1.0.0"
   s.dependency 'DTFoundation',  '~> 1.4.4'
   s.dependency 'MTPDF', '~> 0.0.5'
+  s.dependency 'StackBluriOS', '~> 0.0.1'
 end

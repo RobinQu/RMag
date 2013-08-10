@@ -10,6 +10,8 @@
 
 @interface RPDFPageView : JCTiledScrollView
 
-- (id)initWithFrame:(CGRect)frame page:(CGPDFPageRef)page;
+@property (nonatomic, assign) BOOL magazineMode;
+
+- (id)initWithFrame:(CGRect)frame document:(CGPDFDocumentRef)document page:(CGPDFPageRef)page;
 
 @end

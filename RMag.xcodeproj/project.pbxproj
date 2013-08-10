@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2523214017B5103E00A2950B /* RPDFReaderToolbarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2523213F17B5103E00A2950B /* RPDFReaderToolbarViewController.m */; };
 		252EF7EF17996CE000FB10B8 /* RTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 252EF7EE17996CE000FB10B8 /* RTestCase.m */; };
 		252EF7F217996CFE00FB10B8 /* RDatasourceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 252EF7F117996CFE00FB10B8 /* RDatasourceTest.m */; };
 		254EC6541790FCB800B7B2EB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 254EC6531790FCB800B7B2EB /* Foundation.framework */; };
@@ -54,6 +55,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2523213E17B5103E00A2950B /* RPDFReaderToolbarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPDFReaderToolbarViewController.h; sourceTree = "<group>"; };
+		2523213F17B5103E00A2950B /* RPDFReaderToolbarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPDFReaderToolbarViewController.m; sourceTree = "<group>"; };
 		252EF7ED17996CE000FB10B8 /* RTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTestCase.h; sourceTree = "<group>"; };
 		252EF7EE17996CE000FB10B8 /* RTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTestCase.m; sourceTree = "<group>"; };
 		252EF7F117996CFE00FB10B8 /* RDatasourceTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDatasourceTest.m; sourceTree = "<group>"; };
@@ -220,6 +223,7 @@
 				2564F24617B4B0AD00EC8E4B /* RPDFPageView.m */,
 				2564F24817B4B77600EC8E4B /* RPDFPageViewController.h */,
 				2564F24917B4B77600EC8E4B /* RPDFPageViewController.m */,
+				25FEA58F17B617760076EE1B /* Toolbar */,
 			);
 			name = ReaderKit;
 			sourceTree = "<group>";
@@ -264,6 +268,15 @@
 				2564F23F17B4A9C500EC8E4B /* ReaderKit */,
 			);
 			path = Classes;
+			sourceTree = "<group>";
+		};
+		25FEA58F17B617760076EE1B /* Toolbar */ = {
+			isa = PBXGroup;
+			children = (
+				2523213E17B5103E00A2950B /* RPDFReaderToolbarViewController.h */,
+				2523213F17B5103E00A2950B /* RPDFReaderToolbarViewController.m */,
+			);
+			name = Toolbar;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -420,6 +433,7 @@
 				2597A5A6179199BE0029F7E4 /* RIssue.m in Sources */,
 				254EC6641790FCB800B7B2EB /* RAppDelegate.m in Sources */,
 				25BBFDB71792595A00D3D94D /* RAsset.m in Sources */,
+				2523214017B5103E00A2950B /* RPDFReaderToolbarViewController.m in Sources */,
 				2597A5A7179199BE0029F7E4 /* RIssueManifest.m in Sources */,
 				2597A5A8179199BE0029F7E4 /* RIssuesDataSource.m in Sources */,
 				2564F24717B4B0AD00EC8E4B /* RPDFPageView.m in Sources */,

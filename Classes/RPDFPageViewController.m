@@ -8,6 +8,9 @@
 
 #import "RPDFPageViewController.h"
 #import "RPDFPageView.h"
+#import "RPDFReaderToolbarViewController.h"
+
+
 
 @interface RPDFPageViewController ()
 {
@@ -32,6 +35,7 @@
     if (self) {
         // Custom initialization
         self.pageNumber = page;
+        _PDFDocRef = document;
     }
     return self;
 }
@@ -41,7 +45,10 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     CGPDFPageRef page = CGPDFDocumentGetPage(_PDFDocRef, self.pageNumber);
-    self.pageView = [[RPDFPageView alloc] initWithFrame:self.view.bounds page:page];
+    CGRect rect = {CGPointZero, self.view.bounds.size};
+    self.pageView = [[RPDFPageView alloc] initWithFrame:rect document:_PDFDocRef page:page];
+    self.pageView.tiledScrollViewDelegate = self;
+    self.pageView.centerSingleTap = NO;
     [self.view addSubview:self.pageView];
 }
 
@@ -49,6 +56,17 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - JCTiledScrollViewDelegate
+- (void)tiledScrollView:(JCTiledScrollView *)scrollView didReceiveSingleTap:(UIGestureRecognizer *)gestureRecognizer
+{
+    [RPDFReaderToolbarViewController showForPageViewController:self];
+}
+
+- (JCAnnotationView *)tiledScrollView:(JCTiledScrollView *)scrollView viewForAnnotation:(id<JCAnnotation>)annotation
+{
+    return nil;
 }
 
 @end
