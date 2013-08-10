@@ -7,9 +7,10 @@
 //
 
 #import "RPDFReaderViewController.h"
-#import "RPDFPageViewController.h"
 //override CG functions
 #import <JCTiledScrollView/CGPDFDocument.h>
+#import "RPDFPageViewController.h"
+
 
 @interface RPDFReaderViewController ()
 {
@@ -52,6 +53,8 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    self.view.backgroundColor = [UIColor whiteColor];
+    
     self.pageViewController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
     
     self.pageViewController.delegate = self;
@@ -69,19 +72,26 @@
     [self addChildViewController:self.pageViewController];
     [self.view addSubview:self.pageViewController.view];
     [self.pageViewController didMoveToParentViewController:self];
-    self.pageViewController.view.frame = self.view.bounds;
+    self.pageViewController.view.frame = CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height);
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
+    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationSlide];
 }
+
+//- (void)viewDidAppear:(BOOL)animated
+//{
+//    [super viewDidAppear:animated];
+//    [[UIApplication sharedApplication] setStatusBarHidden:YES];
+//    
+//}
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
 
 }
 
@@ -103,6 +113,7 @@
 - (RPDFPageViewController *)pageViewControllerAtPage:(NSUInteger)page
 {
     RPDFPageViewController *pageVC = [[RPDFPageViewController alloc] initWithDocumentRef:_PDFDocRef atPage:page];
+    pageVC.PDFReaderViewController = self;
     return pageVC;
 }
 

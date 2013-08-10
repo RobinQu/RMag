@@ -9,6 +9,11 @@
 #import <UIKit/UIKit.h>
 
 
+
+@class RPDFReaderViewController;
+
+
+
 @interface RPDFReaderViewController : UIViewController <UIPageViewControllerDataSource, UIPageViewControllerDelegate>
 
 @property (nonatomic, retain) UIPageViewController *pageViewController;

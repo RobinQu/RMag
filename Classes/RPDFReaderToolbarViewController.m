@@ -37,6 +37,11 @@ static const CGFloat kImageBlurRadius = 30.0f;
     return toolbarVC;
 }
 
++ (void)configureDelegate:(id<RPDFReaderToolbarDelegate>)delegate
+{
+    [[self sharedInstance] setDelegate:delegate];
+}
+
 + (void)showForPageViewController:(RPDFPageViewController *)pageViewController
 {
     UIView *backView = pageViewController.view;
@@ -49,7 +54,7 @@ static const CGFloat kImageBlurRadius = 30.0f;
     
     [pageViewController addChildViewController:instance];
     [pageViewController.view addSubview:instance.view];
-    instance.view.frame = pageViewController.view.bounds;
+    instance.view.frame = CGRectMake(0, 0, pageViewController.view.bounds.size.width, pageViewController.view.bounds.size.height);
     [UIView animateWithDuration:kTransitionInterval animations:^{
         instance.view.alpha = 1;
         [instance didMoveToParentViewController:pageViewController];
@@ -59,11 +64,17 @@ static const CGFloat kImageBlurRadius = 30.0f;
 + (void)dismiss
 {
     RPDFReaderToolbarViewController *instance = [self sharedInstance];
+    instance.backgroundView.hidden = YES;
+    [instance dismiss];
+}
+
+- (void)dismiss
+{
     [UIView animateWithDuration:kTransitionInterval animations:^{
-        instance.view.alpha = 0;
+        self.view.alpha = 0;
     } completion:^(BOOL finished) {
-        [instance.view removeFromSuperview];
-        [instance removeFromParentViewController];
+        [self.view removeFromSuperview];
+        [self removeFromParentViewController];
     }];
 }
 
@@ -82,35 +93,40 @@ static const CGFloat kImageBlurRadius = 30.0f;
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     self.view.alpha = 0;
-    self.view.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:.2];
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapOnBackgroundView)];
-    [self.view addGestureRecognizer:tap];
+    self.view.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:.9];
+    [self.view addSubview:self.backgroundView];
+//    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapOnBackgroundView)];
+//    [self.view addGestureRecognizer:tap];
     
     self.backButton = [RPDFToolbarButton backButton];
     [self.backButton setPosition:CGPointMake(36, 185)];
+    [self.backButton addTarget:self action:@selector(informDelegateOfTapOnButton:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.backButton];
     self.tocButton = [RPDFToolbarButton tocButton];
-    [self.tocButton setPosition:CGPointMake(125, 185)];
+    [self.tocButton setPosition:CGPointMake(130, 185)];
     [self.view addSubview:self.tocButton];
+    [self.tocButton addTarget:self action:@selector(informDelegateOfTapOnButton:) forControlEvents:UIControlEventTouchUpInside];
     self.hintButton = [RPDFToolbarButton hintButton];
     [self.hintButton setPosition:CGPointMake(225, 185)];
     [self.view addSubview:self.hintButton];
+    [self.hintButton addTarget:self action:@selector(informDelegateOfTapOnButton:) forControlEvents:UIControlEventTouchUpInside];
 }
 
-//- (void)viewWillAppear:(BOOL)animated
-//{
-//    [super viewWillAppear:animated];
-//    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapOnBackgroundView)];
-//    [self.backgroundView addGestureRecognizer:tap];
-//}
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.view insertSubview:self.backgroundView atIndex:0];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapOnBackgroundView)];
+    [self.view addGestureRecognizer:tap];
+}
 
-//- (void)viewDidDisappear:(BOOL)animated
-//{
-//    [super viewDidDisappear:animated];
-//    for (UIGestureRecognizer *gesture in self.backgroundView.gestureRecognizers) {
-//        [self.backgroundView removeGestureRecognizer:gesture];
-//    }
-//}
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    for (UIGestureRecognizer *gesture in self.view.gestureRecognizers) {
+        [self.view removeGestureRecognizer:gesture];
+    }
+}
 
 - (void)didReceiveMemoryWarning
 {
@@ -123,6 +139,13 @@ static const CGFloat kImageBlurRadius = 30.0f;
     [[self class] dismiss];
 }
 
+- (void)informDelegateOfTapOnButton:(RPDFToolbarButton *)button
+{
+    if (self.delegate && [self.delegate respondsToSelector:@selector(toolbarViewController:didTapOnButton:)]) {
+        [self.delegate toolbarViewController:self didTapOnButton:button];
+    }
+}
+
 - (void)updateBackground:(UIImage *)image
 {
     self.backgroundView.image = [image stackBlur:kImageBlurRadius];
@@ -133,8 +156,8 @@ static const CGFloat kImageBlurRadius = 30.0f;
 {
     if (!_backgroundView) {
         _backgroundView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
+        _backgroundView.alpha = 0.8;
         _backgroundView.hidden = YES;
-        [self.view addSubview:_backgroundView];
     }
     return _backgroundView;
 }

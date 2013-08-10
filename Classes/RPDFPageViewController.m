@@ -8,9 +8,9 @@
 
 #import "RPDFPageViewController.h"
 #import "RPDFPageView.h"
-#import "RPDFReaderToolbarViewController.h"
-
-
+#import "RPDFToolbarButton.h"
+#import <objc/runtime.h>
+#import "RPDFReaderViewController.h"
 
 @interface RPDFPageViewController ()
 {
@@ -19,6 +19,26 @@
 @end
 
 @implementation RPDFPageViewController
+
+static char RPDFReaderViewControllerKey;
+
+
+- (RPDFReaderViewController *)PDFReaderViewController
+{
+    id controller = objc_getAssociatedObject( self,
+                                             &RPDFReaderViewControllerKey );
+    return controller;
+}
+
+- (void)setPDFReaderViewController:(RPDFReaderViewController *)PDFReaderViewController
+{
+    [self willChangeValueForKey:@"PDFReaderViewController"];
+    objc_setAssociatedObject( self,
+                             &RPDFReaderViewControllerKey,
+                             PDFReaderViewController,
+                             OBJC_ASSOCIATION_ASSIGN );
+    [self didChangeValueForKey:@"PDFReaderViewController"];
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -50,6 +70,7 @@
     self.pageView.tiledScrollViewDelegate = self;
     self.pageView.centerSingleTap = NO;
     [self.view addSubview:self.pageView];
+    [RPDFReaderToolbarViewController configureDelegate:self];
 }
 
 - (void)didReceiveMemoryWarning
@@ -68,5 +89,23 @@
 {
     return nil;
 }
+
+#pragma mark - RPDFReaderToolbarDelegate methods
+- (void)toolbarViewController:(RPDFReaderToolbarViewController *)toobarViewController didTapOnButton:(RPDFToolbarButton *)button
+{
+    switch (button.tag) {
+        case RPDFToolbarBackButtonViewTag:
+            [toobarViewController dismiss];
+            [self.PDFReaderViewController dismissViewControllerAnimated:YES completion:nil];
+            break;
+        case RPDFToolbarHintButtonViewTag:
+            break;
+        case RPDFToolbarTOCButtonViewTag:
+            break;
+        default:
+            break;
+    }
+}
+
 
 @end

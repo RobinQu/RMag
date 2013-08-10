@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSUInteger, RPDFToolbarButtonViewTag) {
+    
+    RPDFToolbarBackButtonViewTag = 0,
+    RPDFToolbarTOCButtonViewTag,
+    RPDFToolbarHintButtonViewTag
+};
+
+
 @interface RPDFToolbarButton : UIButton
 
 + (id)backButton;

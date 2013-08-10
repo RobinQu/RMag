@@ -21,18 +21,21 @@
 + (id)backButton
 {
     UIButton *button = [self buttonWithImageNamed:@"reader-back-icon"];
+    button.tag = RPDFToolbarBackButtonViewTag;
     return button;
 }
 
 + (id)tocButton
 {
-    UIButton *button = [self buttonWithImageNamed:@"reader-menu-icon"];
+    UIButton *button = [self buttonWithImageNamed:@"reader-meue-icon"];
+    button.tag = RPDFToolbarTOCButtonViewTag;
     return button;
 }
 
 + (id)hintButton
 {
     UIButton *button = [self buttonWithImageNamed:@"reader-bubble-icon"];
+    button.tag = RPDFToolbarHintButtonViewTag;
     return button;
 }
 

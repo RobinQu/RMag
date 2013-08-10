@@ -8,12 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import <JCTiledScrollView/JCTiledPDFScrollView.h>
+#import "RPDFReaderToolbarViewController.h"
 
-@class RPDFPageView;
+@class RPDFPageView, RPDFReaderViewController;
 
-@interface RPDFPageViewController : UIViewController <JCTiledScrollViewDelegate>
+@interface RPDFPageViewController : UIViewController <JCTiledScrollViewDelegate, RPDFReaderToolbarDelegate>
 
 - (id)initWithDocumentRef:(CGPDFDocumentRef)document atPage:(NSUInteger)page;
+
+@property (nonatomic, assign) RPDFReaderViewController *PDFReaderViewController;
 
 @property (nonatomic, assign) NSUInteger pageNumber;
 @property (nonatomic, retain) RPDFPageView *pageView;
