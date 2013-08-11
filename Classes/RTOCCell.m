@@ -15,6 +15,10 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
+        self.backgroundColor = [UIColor clearColor];
+        UIView *selectedBG = [[UIView alloc] initWithFrame:self.frame];
+        selectedBG.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:.6];
+        self.selectedBackgroundView = selectedBG;
     }
     return self;
 }
@@ -22,7 +26,6 @@
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];
-
     // Configure the view for the selected state
 }
 

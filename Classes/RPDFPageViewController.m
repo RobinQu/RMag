@@ -99,9 +99,10 @@ static char RPDFReaderViewControllerKey;
             [self.PDFReaderViewController dismissViewControllerAnimated:YES completion:nil];
             break;
         case RPDFToolbarHintButtonViewTag:
-            [toobarViewController showTOCForDocument:_PDFDocRef];
+            
             break;
         case RPDFToolbarTOCButtonViewTag:
+            [toobarViewController showTOCForDocument:_PDFDocRef];
             break;
         default:
             break;

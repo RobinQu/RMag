@@ -8,11 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-
-
 @class RPDFReaderViewController;
-
-
 
 @interface RPDFReaderViewController : UIViewController <UIPageViewControllerDataSource, UIPageViewControllerDelegate>
 
@@ -20,5 +16,7 @@
 @property (nonatomic, assign) NSUInteger numberOfPages;
 
 - (id)initWithDocumentURL:(NSURL *)url;
+
+- (void)turnToPage:(NSInteger)page;
 
 @end

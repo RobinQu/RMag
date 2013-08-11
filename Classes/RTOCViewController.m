@@ -10,7 +10,7 @@
 #import "RPDFPageViewController.h"
 #import "RPDFDocumentOutline.h"
 #import "RTOCCell.h"
-
+#import "RPDFReaderToolbarViewController.h"
 
 static const CGFloat kTableHeaderHeight = 40.0f;
 
@@ -55,6 +55,9 @@ static const CGFloat kTableHeaderHeight = 40.0f;
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        [self.view addSubview:self.titleLabel];
+        [self.view addSubview:self.tableView];
+        [self.view addSubview:self.backButton];
     }
     return self;
 }
@@ -63,7 +66,7 @@ static const CGFloat kTableHeaderHeight = 40.0f;
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    [self.tableView registerClass:[RTOCCell class]  forCellReuseIdentifier:RTOCCellIdentifier];
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -78,9 +81,13 @@ static const CGFloat kTableHeaderHeight = 40.0f;
         CGPDFDocumentRelease(_document);
         _document = document;
         self.outlines = [RPDFDocumentOutline outlineFromDocument:document password:@""];
-        [self.tableView reloadData];
+        NSLog(@"titles %d", self.outlines.count);
+//        [self.tableView removeFromSuperview];
+//        self.tableView = nil;
+        [self.tableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:NO];
         CGPDFDocumentRetain(_document);
     }
+    [self.tableView reloadData];
 }
 
 #pragma mark - Components
@@ -90,6 +97,10 @@ static const CGFloat kTableHeaderHeight = 40.0f;
         _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, kTableHeaderHeight, self.view.bounds.size.width, self.view.bounds.size.height -kTableHeaderHeight) style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
+        _tableView.backgroundColor = [UIColor clearColor];
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+
+        [_tableView registerClass:[RTOCCell class] forCellReuseIdentifier:RTOCCellIdentifier];
     }
     return _tableView;
 }
@@ -109,16 +120,17 @@ static const CGFloat kTableHeaderHeight = 40.0f;
 - (UIButton *)backButton
 {
     if (!_backButton) {
-        _backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, kTableHeaderHeight)];
-        [_backButton setTitle:NSLocalizedString(@"Back", nil) forState:UIControlStateNormal];
+        _backButton = [[UIButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width - 60, 0, 60, kTableHeaderHeight)];
+        [_backButton setTitle:NSLocalizedString(@"Done", nil) forState:UIControlStateNormal];
         [_backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+        [_backButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     }
     return _backButton;
 }
 
 - (void)goBack
 {
-    [self.pageViewControler hideTOC];
+    [self.toolbarViewController hideTOC];
 }
 
 #pragma mark - UITableViewDataSource methods
@@ -148,6 +160,20 @@ static const CGFloat kTableHeaderHeight = 40.0f;
 {
     RPDFOutlineEntry *entry = [self.outlines objectAtIndex:indexPath.row];
     return entry.level;
+}
+
+#pragma mark - UITableViewDelegate methods
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    RPDFOutlineEntry *entry = [self.outlines objectAtIndex:indexPath.row];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kEntryRequestNotification object:nil userInfo:@{@"entry":entry}];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    });
+    
+    [self.toolbarViewController hideTOC];
+    
 }
 
 @end

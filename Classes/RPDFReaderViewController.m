@@ -10,7 +10,8 @@
 //override CG functions
 #import <JCTiledScrollView/CGPDFDocument.h>
 #import "RPDFPageViewController.h"
-
+#import "RPDFReaderToolbarViewController.h"
+#import "RPDFDocumentOutline.h"
 
 @interface RPDFReaderViewController ()
 {
@@ -49,6 +50,7 @@
     return self;
 }
 
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -67,12 +69,14 @@
         self.pageViewController.doubleSided = YES;
     }
     NSArray *theViewControllers = [self pageViewControllersForRange:theRange];
-    [self.pageViewController setViewControllers:theViewControllers direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:NULL];
+    [self.pageViewController setViewControllers:theViewControllers direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
     
     [self addChildViewController:self.pageViewController];
     [self.view addSubview:self.pageViewController.view];
     [self.pageViewController didMoveToParentViewController:self];
     self.pageViewController.view.frame = CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height);
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleEntryRequestNotification:) name:kEntryRequestNotification object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -99,6 +103,26 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)handleEntryRequestNotification:(NSNotification *)notification
+{
+    RPDFOutlineEntry *entry = [notification.userInfo valueForKey:@"entry"];
+    if ([entry.target isKindOfClass:[NSURL class]]) {
+        //TODO handle URL target
+    } else {
+        NSInteger pageNo = [entry.target integerValue];
+        [self turnToPage:pageNo];
+    }
+}
+
+- (void)turnToPage:(NSInteger)page
+{
+    RPDFPageViewController *pageVC = [self pageViewControllerAtPage:page];
+    
+    NSArray *pageNumbers = [self.pageViewController.viewControllers valueForKey:@"pageNumber"];
+    NSInteger maxPageNo = [[pageNumbers valueForKeyPath:@"@max.intValue"] integerValue];
+    [self.pageViewController setViewControllers:@[pageVC] direction: page > maxPageNo ?   UIPageViewControllerNavigationDirectionForward : UIPageViewControllerNavigationDirectionReverse animated:YES completion:nil];
 }
 
 - (NSArray *)pageViewControllersForRange:(NSRange)inRange
@@ -142,5 +166,6 @@
     return [self pageViewControllerAtPage:nextPageNumber];
     
 }
+
 
 @end

@@ -12,6 +12,7 @@
 #import "RTOCViewController.h"
 #import <StackBluriOS/UIImage+StackBlur.h>
 
+
 static const CGFloat kTransitionInterval = .3f;
 static const CGFloat kImageBlurRadius = 30.0f;
 
@@ -20,6 +21,7 @@ static const CGFloat kImageBlurRadius = 30.0f;
 + (id)sharedInstance;
 
 @property (nonatomic, retain) UIImageView *backgroundView;
+
 @property (nonatomic, retain) RPDFToolbarButton *backButton;
 @property (nonatomic, retain) RPDFToolbarButton *tocButton;
 @property (nonatomic, retain) RPDFToolbarButton *hintButton;
@@ -79,6 +81,11 @@ static const CGFloat kImageBlurRadius = 30.0f;
     }];
 }
 
+- (void)didPanOnToolbar
+{
+//    NSLog(@"do nothing for panning; just prevent page view controller to slide");
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -94,24 +101,27 @@ static const CGFloat kImageBlurRadius = 30.0f;
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     self.view.alpha = 0;
-    self.view.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:.9];
+    self.view.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:.5];
     [self.view addSubview:self.backgroundView];
 //    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapOnBackgroundView)];
 //    [self.view addGestureRecognizer:tap];
+    self.buttonContainer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 220, 60)];
+    self.buttonContainer.center = self.view.center;
     
     self.backButton = [RPDFToolbarButton backButton];
-    [self.backButton setPosition:CGPointMake(36, 185)];
+    [self.backButton setPosition:CGPointMake(0, 0)];
     [self.backButton addTarget:self action:@selector(informDelegateOfTapOnButton:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:self.backButton];
+    [self.buttonContainer addSubview:self.backButton];
     self.tocButton = [RPDFToolbarButton tocButton];
-    [self.tocButton setPosition:CGPointMake(130, 185)];
-    [self.view addSubview:self.tocButton];
+    [self.tocButton setPosition:CGPointMake(80, 0)];
+    [self.buttonContainer addSubview:self.tocButton];
     [self.tocButton addTarget:self action:@selector(informDelegateOfTapOnButton:) forControlEvents:UIControlEventTouchUpInside];
     self.hintButton = [RPDFToolbarButton hintButton];
-    [self.hintButton setPosition:CGPointMake(225, 185)];
-    [self.view addSubview:self.hintButton];
+    [self.hintButton setPosition:CGPointMake(160, 0)];
+    [self.buttonContainer addSubview:self.hintButton];
     [self.hintButton addTarget:self action:@selector(informDelegateOfTapOnButton:) forControlEvents:UIControlEventTouchUpInside];
     
+    [self.view addSubview:self.buttonContainer];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -119,7 +129,10 @@ static const CGFloat kImageBlurRadius = 30.0f;
     [super viewWillAppear:animated];
     [self.view insertSubview:self.backgroundView atIndex:0];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapOnBackgroundView)];
-    [self.view addGestureRecognizer:tap];
+    [self.backgroundView addGestureRecognizer:tap];
+    
+    UIPanGestureRecognizer *pan =[[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(didPanOnToolbar)];
+    [self.view addGestureRecognizer:pan];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -160,6 +173,7 @@ static const CGFloat kImageBlurRadius = 30.0f;
         _backgroundView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
         _backgroundView.alpha = 0.8;
         _backgroundView.hidden = YES;
+        _backgroundView.userInteractionEnabled = YES;
     }
     return _backgroundView;
 }
@@ -167,23 +181,27 @@ static const CGFloat kImageBlurRadius = 30.0f;
 - (void)showTOCForDocument:(CGPDFDocumentRef)document
 {
     RTOCViewController *toc = [RTOCViewController sharedTOCForDocument:document];
+    toc.toolbarViewController = self;
+    [self addChildViewController:toc];
     toc.view.alpha = 0;
-    [self transitionFromViewController:self toViewController:toc duration:kTransitionInterval options:UIViewAnimationOptionCurveEaseIn animations:^{
-        self.view.alpha = 0;
+    [self.view addSubview:toc.view];
+    [UIView animateWithDuration:kTransitionInterval animations:^{
         toc.view.alpha = 1;
+        self.buttonContainer.alpha = 0;
     } completion:^(BOOL finished) {
-        
+
     }];
 }
 
 - (void)hideTOC
 {
     RTOCViewController *toc = [RTOCViewController sharedInstance];
-    [self transitionFromViewController:toc toViewController:self duration:kTransitionInterval options:UIViewAnimationOptionCurveEaseOut animations:^{
-        self.view.alpha = 1;
+    [UIView animateWithDuration:kTransitionInterval animations:^{
         toc.view.alpha = 0;
+        self.buttonContainer.alpha = 1;
     } completion:^(BOOL finished) {
-        
+        [toc removeFromParentViewController];
+        [toc.view removeFromSuperview];
     }];
 }
 

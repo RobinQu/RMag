@@ -16,9 +16,6 @@
 
 - (id)initWithDocumentRef:(CGPDFDocumentRef)document atPage:(NSUInteger)page;
 
-- (void)showTOC;
-- (void)hideTOC;
-
 @property (nonatomic, assign) RPDFReaderViewController *PDFReaderViewController;
 
 @property (nonatomic, assign) NSUInteger pageNumber;
