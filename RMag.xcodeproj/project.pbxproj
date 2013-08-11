@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		251D088417B7249300EFE882 /* RTOCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 251D088317B7249300EFE882 /* RTOCViewController.m */; };
+		251D088717B7444700EFE882 /* RPDFDocumentOutline.m in Sources */ = {isa = PBXBuildFile; fileRef = 251D088617B7444700EFE882 /* RPDFDocumentOutline.m */; };
+		251D088A17B7786300EFE882 /* RTOCCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 251D088917B7786300EFE882 /* RTOCCell.m */; };
 		2523214017B5103E00A2950B /* RPDFReaderToolbarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2523213F17B5103E00A2950B /* RPDFReaderToolbarViewController.m */; };
 		252EF7EF17996CE000FB10B8 /* RTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 252EF7EE17996CE000FB10B8 /* RTestCase.m */; };
 		252EF7F217996CFE00FB10B8 /* RDatasourceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 252EF7F117996CFE00FB10B8 /* RDatasourceTest.m */; };
@@ -62,6 +65,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		251D088217B7249300EFE882 /* RTOCViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTOCViewController.h; sourceTree = "<group>"; };
+		251D088317B7249300EFE882 /* RTOCViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTOCViewController.m; sourceTree = "<group>"; };
+		251D088517B7444700EFE882 /* RPDFDocumentOutline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPDFDocumentOutline.h; sourceTree = "<group>"; };
+		251D088617B7444700EFE882 /* RPDFDocumentOutline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPDFDocumentOutline.m; sourceTree = "<group>"; };
+		251D088817B7786300EFE882 /* RTOCCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTOCCell.h; sourceTree = "<group>"; };
+		251D088917B7786300EFE882 /* RTOCCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTOCCell.m; sourceTree = "<group>"; };
 		2523213E17B5103E00A2950B /* RPDFReaderToolbarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPDFReaderToolbarViewController.h; sourceTree = "<group>"; };
 		2523213F17B5103E00A2950B /* RPDFReaderToolbarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPDFReaderToolbarViewController.m; sourceTree = "<group>"; };
 		252EF7ED17996CE000FB10B8 /* RTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTestCase.h; sourceTree = "<group>"; };
@@ -235,6 +244,8 @@
 		2564F23F17B4A9C500EC8E4B /* ReaderKit */ = {
 			isa = PBXGroup;
 			children = (
+				251D088517B7444700EFE882 /* RPDFDocumentOutline.h */,
+				251D088617B7444700EFE882 /* RPDFDocumentOutline.m */,
 				2564F24217B4AA5300EC8E4B /* RPDFReaderViewController.h */,
 				2564F24317B4AA5300EC8E4B /* RPDFReaderViewController.m */,
 				2564F24517B4B0AD00EC8E4B /* RPDFPageView.h */,
@@ -295,6 +306,10 @@
 				2523213F17B5103E00A2950B /* RPDFReaderToolbarViewController.m */,
 				25FEA5BD17B658C30076EE1B /* RPDFToolbarButton.h */,
 				25FEA5BE17B658C30076EE1B /* RPDFToolbarButton.m */,
+				251D088217B7249300EFE882 /* RTOCViewController.h */,
+				251D088317B7249300EFE882 /* RTOCViewController.m */,
+				251D088817B7786300EFE882 /* RTOCCell.h */,
+				251D088917B7786300EFE882 /* RTOCCell.m */,
 			);
 			name = Toolbar;
 			sourceTree = "<group>";
@@ -464,6 +479,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				251D088717B7444700EFE882 /* RPDFDocumentOutline.m in Sources */,
 				2597A5AB179199C80029F7E4 /* RIssuesViewController.m in Sources */,
 				2564F24417B4AA5300EC8E4B /* RPDFReaderViewController.m in Sources */,
 				2564F24A17B4B77600EC8E4B /* RPDFPageViewController.m in Sources */,
@@ -476,6 +492,8 @@
 				25FEA5BF17B658C30076EE1B /* RPDFToolbarButton.m in Sources */,
 				2597A5A7179199BE0029F7E4 /* RIssueManifest.m in Sources */,
 				2597A5A8179199BE0029F7E4 /* RIssuesDataSource.m in Sources */,
+				251D088A17B7786300EFE882 /* RTOCCell.m in Sources */,
+				251D088417B7249300EFE882 /* RTOCViewController.m in Sources */,
 				2564F24717B4B0AD00EC8E4B /* RPDFPageView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

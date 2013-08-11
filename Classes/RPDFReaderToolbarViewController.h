@@ -26,6 +26,6 @@
 + (void)configureDelegate:(id<RPDFReaderToolbarDelegate>)delegate;
 + (void)dismiss;
 - (void)dismiss;
-
+- (void)showTOCForDocument:(CGPDFDocumentRef)document;
 
 @end

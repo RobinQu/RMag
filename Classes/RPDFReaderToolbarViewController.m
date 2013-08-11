@@ -9,6 +9,7 @@
 #import "RPDFReaderToolbarViewController.h"
 #import "RPDFPageViewController.h"
 #import "RPDFToolbarButton.h"
+#import "RTOCViewController.h"
 #import <StackBluriOS/UIImage+StackBlur.h>
 
 static const CGFloat kTransitionInterval = .3f;
@@ -110,6 +111,7 @@ static const CGFloat kImageBlurRadius = 30.0f;
     [self.hintButton setPosition:CGPointMake(225, 185)];
     [self.view addSubview:self.hintButton];
     [self.hintButton addTarget:self action:@selector(informDelegateOfTapOnButton:) forControlEvents:UIControlEventTouchUpInside];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -160,6 +162,29 @@ static const CGFloat kImageBlurRadius = 30.0f;
         _backgroundView.hidden = YES;
     }
     return _backgroundView;
+}
+
+- (void)showTOCForDocument:(CGPDFDocumentRef)document
+{
+    RTOCViewController *toc = [RTOCViewController sharedTOCForDocument:document];
+    toc.view.alpha = 0;
+    [self transitionFromViewController:self toViewController:toc duration:kTransitionInterval options:UIViewAnimationOptionCurveEaseIn animations:^{
+        self.view.alpha = 0;
+        toc.view.alpha = 1;
+    } completion:^(BOOL finished) {
+        
+    }];
+}
+
+- (void)hideTOC
+{
+    RTOCViewController *toc = [RTOCViewController sharedInstance];
+    [self transitionFromViewController:toc toViewController:self duration:kTransitionInterval options:UIViewAnimationOptionCurveEaseOut animations:^{
+        self.view.alpha = 1;
+        toc.view.alpha = 0;
+    } completion:^(BOOL finished) {
+        
+    }];
 }
 
 @end
