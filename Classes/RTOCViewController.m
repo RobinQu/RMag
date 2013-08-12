@@ -10,10 +10,9 @@
 #import "RPDFPageViewController.h"
 #import "RPDFDocumentOutline.h"
 #import "RTOCCell.h"
-#import "RPDFReaderToolbarViewController.h"
+
 
 static const CGFloat kTableHeaderHeight = 40.0f;
-
 
 @interface RTOCViewController ()
 
@@ -23,32 +22,9 @@ static const CGFloat kTableHeaderHeight = 40.0f;
 
 @property (nonatomic, retain) NSArray *outlines;
 
-+ (id)sharedInstance;
-- (void)updateDocument:(CGPDFDocumentRef)document;
-
 @end
 
 @implementation RTOCViewController
-{
-    CGPDFDocumentRef _document;
-}
-
-+ (id)sharedInstance
-{
-    static RTOCViewController *instance = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        instance = [[RTOCViewController alloc] initWithNibName:nil bundle:nil];
-    });
-    return instance;
-}
-
-+ (id)sharedTOCForDocument:(CGPDFDocumentRef)document
-{
-    id instance = [self sharedInstance];
-    [instance updateDocument:document];
-    return instance;
-}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -66,7 +42,6 @@ static const CGFloat kTableHeaderHeight = 40.0f;
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    
 }
 
 - (void)didReceiveMemoryWarning
@@ -75,26 +50,18 @@ static const CGFloat kTableHeaderHeight = 40.0f;
     // Dispose of any resources that can be recreated.
 }
 
-- (void)updateDocument:(CGPDFDocumentRef)document
+- (void)updateWithOutlines:(NSArray *)outlines
 {
-    if (document != _document) {
-        CGPDFDocumentRelease(_document);
-        _document = document;
-        self.outlines = [RPDFDocumentOutline outlineFromDocument:document password:@""];
-        NSLog(@"titles %d", self.outlines.count);
-//        [self.tableView removeFromSuperview];
-//        self.tableView = nil;
-        [self.tableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:NO];
-        CGPDFDocumentRetain(_document);
-    }
+    self.outlines = outlines;
     [self.tableView reloadData];
+//    [self.tableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:NO];
 }
 
 #pragma mark - Components
 - (UITableView *)tableView
 {
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, kTableHeaderHeight, self.view.bounds.size.width, self.view.bounds.size.height -kTableHeaderHeight) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, kTableHeaderHeight, self.view.bounds.size.width, self.view.bounds.size.height - kTableHeaderHeight) style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.backgroundColor = [UIColor clearColor];
@@ -130,7 +97,10 @@ static const CGFloat kTableHeaderHeight = 40.0f;
 
 - (void)goBack
 {
+    //hide toc
     [self.toolbarViewController hideTOC];
+    //directly exit toolbar VC
+    [self.toolbarViewController dismiss];
 }
 
 #pragma mark - UITableViewDataSource methods
@@ -171,9 +141,8 @@ static const CGFloat kTableHeaderHeight = 40.0f;
     dispatch_async(dispatch_get_main_queue(), ^{
         [tableView deselectRowAtIndexPath:indexPath animated:NO];
     });
-    
     [self.toolbarViewController hideTOC];
-    
+    [self.toolbarViewController dismiss];
 }
 
 @end

@@ -29,6 +29,7 @@
 		2564F24417B4AA5300EC8E4B /* RPDFReaderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2564F24317B4AA5300EC8E4B /* RPDFReaderViewController.m */; };
 		2564F24717B4B0AD00EC8E4B /* RPDFPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2564F24617B4B0AD00EC8E4B /* RPDFPageView.m */; };
 		2564F24A17B4B77600EC8E4B /* RPDFPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2564F24917B4B77600EC8E4B /* RPDFPageViewController.m */; };
+		2596F2FC17B8BA2E008EC224 /* RToolbarHelperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2596F2FB17B8BA2E008EC224 /* RToolbarHelperViewController.m */; };
 		2597A590179150F60029F7E4 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 2597A586179150F60029F7E4 /* Icon-72.png */; };
 		2597A591179150F60029F7E4 /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2597A587179150F60029F7E4 /* Icon-72@2x.png */; };
 		2597A592179150F60029F7E4 /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 2597A588179150F60029F7E4 /* Icon-Small-50.png */; };
@@ -100,6 +101,8 @@
 		2564F24617B4B0AD00EC8E4B /* RPDFPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPDFPageView.m; sourceTree = "<group>"; };
 		2564F24817B4B77600EC8E4B /* RPDFPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPDFPageViewController.h; sourceTree = "<group>"; };
 		2564F24917B4B77600EC8E4B /* RPDFPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPDFPageViewController.m; sourceTree = "<group>"; };
+		2596F2FA17B8BA2E008EC224 /* RToolbarHelperViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RToolbarHelperViewController.h; sourceTree = "<group>"; };
+		2596F2FB17B8BA2E008EC224 /* RToolbarHelperViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RToolbarHelperViewController.m; sourceTree = "<group>"; };
 		2597A586179150F60029F7E4 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
 		2597A587179150F60029F7E4 /* Icon-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72@2x.png"; sourceTree = "<group>"; };
 		2597A588179150F60029F7E4 /* Icon-Small-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small-50.png"; sourceTree = "<group>"; };
@@ -310,6 +313,8 @@
 				251D088317B7249300EFE882 /* RTOCViewController.m */,
 				251D088817B7786300EFE882 /* RTOCCell.h */,
 				251D088917B7786300EFE882 /* RTOCCell.m */,
+				2596F2FA17B8BA2E008EC224 /* RToolbarHelperViewController.h */,
+				2596F2FB17B8BA2E008EC224 /* RToolbarHelperViewController.m */,
 			);
 			name = Toolbar;
 			sourceTree = "<group>";
@@ -480,6 +485,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				251D088717B7444700EFE882 /* RPDFDocumentOutline.m in Sources */,
+				2596F2FC17B8BA2E008EC224 /* RToolbarHelperViewController.m in Sources */,
 				2597A5AB179199C80029F7E4 /* RIssuesViewController.m in Sources */,
 				2564F24417B4AA5300EC8E4B /* RPDFReaderViewController.m in Sources */,
 				2564F24A17B4B77600EC8E4B /* RPDFPageViewController.m in Sources */,

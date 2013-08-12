@@ -7,18 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-
-
+#import "RPDFReaderToolbarViewController.h"
+#import "RToolbarHelperViewController.h"
 
 @class RPDFPageViewController, RPDFReaderToolbarViewController;
 
-@interface RTOCViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
-
-@property (nonatomic, assign) RPDFReaderToolbarViewController *toolbarViewController;
-
-+ (id)sharedTOCForDocument:(CGPDFDocumentRef)document;
-+ (id)sharedInstance;
-
-
+@interface RTOCViewController : RToolbarHelperViewController <UITableViewDataSource, UITableViewDelegate, RPDFTOCVC>
 
 @end

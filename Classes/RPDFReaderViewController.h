@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RPDFReaderToolbarViewController.h"
+#import <JCTiledScrollView/JCTiledPDFScrollView.h>
 
 @class RPDFReaderViewController;
 
-@interface RPDFReaderViewController : UIViewController <UIPageViewControllerDataSource, UIPageViewControllerDelegate>
+@interface RPDFReaderViewController : UIViewController <UIPageViewControllerDataSource, UIPageViewControllerDelegate, JCTiledScrollViewDelegate, RPDFReaderToolbarDelegate>
 
 @property (nonatomic, retain) UIPageViewController *pageViewController;
 @property (nonatomic, assign) NSUInteger numberOfPages;

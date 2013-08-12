@@ -12,6 +12,8 @@
 #import "RPDFPageViewController.h"
 #import "RPDFReaderToolbarViewController.h"
 #import "RPDFDocumentOutline.h"
+#import "RPDFToolbarButton.h"
+
 
 @interface RPDFReaderViewController ()
 {
@@ -77,6 +79,8 @@
     self.pageViewController.view.frame = CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height);
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleEntryRequestNotification:) name:kEntryRequestNotification object:nil];
+    
+     [RPDFReaderToolbarViewController configureDelegate:self];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -138,6 +142,7 @@
 {
     RPDFPageViewController *pageVC = [[RPDFPageViewController alloc] initWithDocumentRef:_PDFDocRef atPage:page];
     pageVC.PDFReaderViewController = self;
+    pageVC.pageView.tiledScrollViewDelegate = self;
     return pageVC;
 }
 
@@ -165,6 +170,36 @@
     }
     return [self pageViewControllerAtPage:nextPageNumber];
     
+}
+
+#pragma mark - JCTiledScrollViewDelegate
+- (void)tiledScrollView:(JCTiledScrollView *)scrollView didReceiveSingleTap:(UIGestureRecognizer *)gestureRecognizer
+{
+    [RPDFReaderToolbarViewController show];
+}
+
+- (JCAnnotationView *)tiledScrollView:(JCTiledScrollView *)scrollView viewForAnnotation:(id<JCAnnotation>)annotation
+{
+    return nil;
+}
+
+#pragma mark - RPDFReaderToolbarDelegate methods
+- (void)toolbarViewController:(RPDFReaderToolbarViewController *)toobarViewController didTapOnButton:(RPDFToolbarButton *)button
+{
+    switch (button.tag) {
+        case RPDFToolbarBackButtonViewTag:
+            [toobarViewController dismiss];
+            [self dismissViewControllerAnimated:YES completion:nil];
+            break;
+        case RPDFToolbarHintButtonViewTag:
+            [toobarViewController showHint];
+            break;
+        case RPDFToolbarTOCButtonViewTag:
+            [toobarViewController showTOCForDocument:_PDFDocRef];
+            break;
+        default:
+            break;
+    }
 }
 
 

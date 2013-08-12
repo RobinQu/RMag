@@ -10,10 +10,10 @@
 #import "RPDFPageViewController.h"
 #import "RPDFToolbarButton.h"
 #import "RTOCViewController.h"
+#import "RPDFDocumentOutline.h"
 #import <StackBluriOS/UIImage+StackBlur.h>
 
 
-static const CGFloat kTransitionInterval = .3f;
 static const CGFloat kImageBlurRadius = 30.0f;
 
 @interface RPDFReaderToolbarViewController ()
@@ -45,45 +45,37 @@ static const CGFloat kImageBlurRadius = 30.0f;
     [[self sharedInstance] setDelegate:delegate];
 }
 
-+ (void)showForPageViewController:(RPDFPageViewController *)pageViewController
++ (void)show
 {
-    UIView *backView = pageViewController.view;
-    UIGraphicsBeginImageContext(backView.bounds.size);
-    [backView.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIWindow *window = [[UIApplication sharedApplication] keyWindow];
+    UIGraphicsBeginImageContext(window.bounds.size);
+    [window.layer renderInContext:UIGraphicsGetCurrentContext()];
     UIImage *viewImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     RPDFReaderToolbarViewController *instance = [self sharedInstance];
     [instance updateBackground:viewImage];
+    [window addSubview:instance.view];
     
-    [pageViewController addChildViewController:instance];
-    [pageViewController.view addSubview:instance.view];
-    instance.view.frame = CGRectMake(0, 0, pageViewController.view.bounds.size.width, pageViewController.view.bounds.size.height);
+    instance.view.frame = CGRectMake(0, 0, window.bounds.size.width, window.bounds.size.height);
     [UIView animateWithDuration:kTransitionInterval animations:^{
         instance.view.alpha = 1;
-        [instance didMoveToParentViewController:pageViewController];
     }];
 }
 
 + (void)dismiss
 {
     RPDFReaderToolbarViewController *instance = [self sharedInstance];
-    instance.backgroundView.hidden = YES;
     [instance dismiss];
 }
 
 - (void)dismiss
 {
+    self.backgroundView.hidden = YES;
     [UIView animateWithDuration:kTransitionInterval animations:^{
         self.view.alpha = 0;
     } completion:^(BOOL finished) {
         [self.view removeFromSuperview];
-        [self removeFromParentViewController];
     }];
-}
-
-- (void)didPanOnToolbar
-{
-//    NSLog(@"do nothing for panning; just prevent page view controller to slide");
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -101,10 +93,8 @@ static const CGFloat kImageBlurRadius = 30.0f;
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     self.view.alpha = 0;
-    self.view.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:.5];
+    self.view.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:.8];
     [self.view addSubview:self.backgroundView];
-//    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapOnBackgroundView)];
-//    [self.view addGestureRecognizer:tap];
     self.buttonContainer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 220, 60)];
     self.buttonContainer.center = self.view.center;
     
@@ -131,15 +121,15 @@ static const CGFloat kImageBlurRadius = 30.0f;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapOnBackgroundView)];
     [self.backgroundView addGestureRecognizer:tap];
     
-    UIPanGestureRecognizer *pan =[[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(didPanOnToolbar)];
-    [self.view addGestureRecognizer:pan];
+//    UIPanGestureRecognizer *pan =[[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(didPanOnToolbar)];
+//    [self.view addGestureRecognizer:pan];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
     for (UIGestureRecognizer *gesture in self.view.gestureRecognizers) {
-        [self.view removeGestureRecognizer:gesture];
+        [self.backgroundView removeGestureRecognizer:gesture];
     }
 }
 
@@ -149,11 +139,6 @@ static const CGFloat kImageBlurRadius = 30.0f;
     // Dispose of any resources that can be recreated.
 }
 
-- (void)didTapOnBackgroundView
-{
-    [[self class] dismiss];
-}
-
 - (void)informDelegateOfTapOnButton:(RPDFToolbarButton *)button
 {
     if (self.delegate && [self.delegate respondsToSelector:@selector(toolbarViewController:didTapOnButton:)]) {
@@ -161,6 +146,7 @@ static const CGFloat kImageBlurRadius = 30.0f;
     }
 }
 
+#pragma mark - Blurred Background
 - (void)updateBackground:(UIImage *)image
 {
     self.backgroundView.image = [image stackBlur:kImageBlurRadius];
@@ -178,31 +164,58 @@ static const CGFloat kImageBlurRadius = 30.0f;
     return _backgroundView;
 }
 
+- (void)didTapOnBackgroundView
+{
+    [self dismiss];
+}
+
+#pragma mark - TOC VC
+- (UIViewController<RPDFTOCVC> *)TOCViewController
+{
+    if (!_TOCViewController) {
+        if (self.delegate && [self.delegate respondsToSelector:@selector(TOCViewControllerForToolbarViewController:)]) {
+            _TOCViewController = [self.delegate TOCViewControllerForToolbarViewController:self];
+        } else {
+            _TOCViewController = [RTOCViewController sharedInstance];
+        }
+    }
+    return _TOCViewController;
+}
+
 - (void)showTOCForDocument:(CGPDFDocumentRef)document
 {
-    RTOCViewController *toc = [RTOCViewController sharedTOCForDocument:document];
-    toc.toolbarViewController = self;
-    [self addChildViewController:toc];
-    toc.view.alpha = 0;
-    [self.view addSubview:toc.view];
-    [UIView animateWithDuration:kTransitionInterval animations:^{
-        toc.view.alpha = 1;
-        self.buttonContainer.alpha = 0;
-    } completion:^(BOOL finished) {
-
-    }];
+    UIViewController<RPDFTOCVC> *toc = self.TOCViewController;
+    CGPDFDocumentRetain(document);
+    NSArray *outlines = [RPDFDocumentOutline outlineFromDocument:document password:@""];
+    [toc updateWithOutlines:outlines];
+    CGPDFDocumentRelease(document);
+    [toc showForToolbarViewController:self];
 }
 
 - (void)hideTOC
 {
-    RTOCViewController *toc = [RTOCViewController sharedInstance];
-    [UIView animateWithDuration:kTransitionInterval animations:^{
-        toc.view.alpha = 0;
-        self.buttonContainer.alpha = 1;
-    } completion:^(BOOL finished) {
-        [toc removeFromParentViewController];
-        [toc.view removeFromSuperview];
-    }];
+    [self.TOCViewController dismiss];
+}
+
+#pragma mark - Hints VC
+- (UIViewController<RPDFHintVC> *)hintViewController
+{
+    if (!_hintViewController) {
+        if (self.delegate && [self.delegate respondsToSelector:@selector(HintViewControllerForToolbarViewController:)]) {
+            _hintViewController = [self.delegate HintViewControllerForToolbarViewController:self];
+        }
+    }
+    return _hintViewController;
+}
+
+- (void)showHint
+{
+    [self.hintViewController showForToolbarViewController:self];
+}
+
+- (void)hideHint
+{
+    [self.hintViewController dismiss];
 }
 
 @end

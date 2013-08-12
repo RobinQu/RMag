@@ -7,8 +7,6 @@
 //
 
 #import "RPDFPageViewController.h"
-#import "RPDFPageView.h"
-#import "RPDFToolbarButton.h"
 #import <objc/runtime.h>
 #import "RPDFReaderViewController.h"
 
@@ -22,11 +20,10 @@
 
 static char RPDFReaderViewControllerKey;
 
-
 - (RPDFReaderViewController *)PDFReaderViewController
 {
-    id controller = objc_getAssociatedObject( self,
-                                             &RPDFReaderViewControllerKey );
+    id controller = objc_getAssociatedObject(self,
+                                             &RPDFReaderViewControllerKey);
     return controller;
 }
 
@@ -56,6 +53,11 @@ static char RPDFReaderViewControllerKey;
         // Custom initialization
         self.pageNumber = page;
         _PDFDocRef = document;
+        CGRect rect = {CGPointZero, self.view.bounds.size};
+        CGPDFPageRef page = CGPDFDocumentGetPage(_PDFDocRef, self.pageNumber);
+        self.pageView = [[RPDFPageView alloc] initWithFrame:rect document:_PDFDocRef page:page];
+        [self.view addSubview:self.pageView];
+        self.pageView.centerSingleTap = NO;
     }
     return self;
 }
@@ -64,13 +66,6 @@ static char RPDFReaderViewControllerKey;
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    CGPDFPageRef page = CGPDFDocumentGetPage(_PDFDocRef, self.pageNumber);
-    CGRect rect = {CGPointZero, self.view.bounds.size};
-    self.pageView = [[RPDFPageView alloc] initWithFrame:rect document:_PDFDocRef page:page];
-    self.pageView.tiledScrollViewDelegate = self;
-    self.pageView.centerSingleTap = NO;
-    [self.view addSubview:self.pageView];
-    [RPDFReaderToolbarViewController configureDelegate:self];
 }
 
 - (void)didReceiveMemoryWarning
@@ -79,35 +74,7 @@ static char RPDFReaderViewControllerKey;
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - JCTiledScrollViewDelegate
-- (void)tiledScrollView:(JCTiledScrollView *)scrollView didReceiveSingleTap:(UIGestureRecognizer *)gestureRecognizer
-{
-    [RPDFReaderToolbarViewController showForPageViewController:self];
-}
 
-- (JCAnnotationView *)tiledScrollView:(JCTiledScrollView *)scrollView viewForAnnotation:(id<JCAnnotation>)annotation
-{
-    return nil;
-}
-
-#pragma mark - RPDFReaderToolbarDelegate methods
-- (void)toolbarViewController:(RPDFReaderToolbarViewController *)toobarViewController didTapOnButton:(RPDFToolbarButton *)button
-{
-    switch (button.tag) {
-        case RPDFToolbarBackButtonViewTag:
-            [toobarViewController dismiss];
-            [self.PDFReaderViewController dismissViewControllerAnimated:YES completion:nil];
-            break;
-        case RPDFToolbarHintButtonViewTag:
-            
-            break;
-        case RPDFToolbarTOCButtonViewTag:
-            [toobarViewController showTOCForDocument:_PDFDocRef];
-            break;
-        default:
-            break;
-    }
-}
 
 
 @end

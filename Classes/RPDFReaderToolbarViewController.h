@@ -10,6 +10,23 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol RPDFHelperVC <NSObject>
+
+- (void)showForToolbarViewController:(RPDFReaderToolbarViewController *)toolbarVC;
+- (void)dismiss;
+
+@end
+
+
+@protocol RPDFTOCVC <RPDFHelperVC>
+
+- (void)updateWithOutlines:(NSArray *)outlines;
+
+@end
+
+@protocol RPDFHintVC <RPDFHelperVC>
+
+@end
 
 static NSString *const kEntryRequestNotification = @"entry-request";
 
@@ -17,19 +34,27 @@ static NSString *const kEntryRequestNotification = @"entry-request";
 
 - (void)toolbarViewController:(RPDFReaderToolbarViewController *)toobarViewController didTapOnButton:(RPDFToolbarButton *)button;
 
+@optional
+- (UIViewController<RPDFTOCVC> *)TOCViewControllerForToolbarViewController:(RPDFReaderToolbarViewController *)toolbarVC;
+- (UIViewController<RPDFHintVC> *)HintViewControllerForToolbarViewController:(RPDFReaderToolbarViewController *)toolbarVC;
+
 @end
+
 
 @interface RPDFReaderToolbarViewController : UIViewController
 
-
 @property (nonatomic, assign) id<RPDFReaderToolbarDelegate> delegate;
 @property (nonatomic, retain) UIView *buttonContainer;
+@property (nonatomic, assign) UIViewController<RPDFHintVC> *hintViewController;
+@property (nonatomic, assign) UIViewController<RPDFTOCVC> *TOCViewController;
 
-+ (void)showForPageViewController:(RPDFPageViewController *)pageViewController;
++ (void)show;
 + (void)configureDelegate:(id<RPDFReaderToolbarDelegate>)delegate;
 + (void)dismiss;
 - (void)dismiss;
 - (void)showTOCForDocument:(CGPDFDocumentRef)document;
 - (void)hideTOC;
+- (void)showHint;
+- (void)hideHint;
 
 @end
