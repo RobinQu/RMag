@@ -8,6 +8,6 @@ A magazine distribution frameworks that just works
 * Download resuming
 * Download checksum
 * Background transfer (iOS 7+)
-
+* A simple PDF Reader `RPDFReaderViewController`
 
 **NOT PRODUCTION READY**
