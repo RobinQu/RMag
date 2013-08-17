@@ -48,10 +48,17 @@
         //second argument is empty, as we don't support PDF with password for now
         _PDFDocRef =  CGPDFDocumentCreateX((__bridge CFURLRef)url, @"");
         self.numberOfPages = CGPDFDocumentGetNumberOfPages(_PDFDocRef);
+        NSRange theRange = { .location = 1, .length = 1 };
+        if (self.pageViewController.spineLocation == UIPageViewControllerSpineLocationMid)
+        {
+            theRange = (NSRange){ .location = 0, .length = 2 };
+            self.pageViewController.doubleSided = YES;
+        }
+        NSArray *theViewControllers = [self pageViewControllersForRange:theRange];
+        [self.pageViewController setViewControllers:theViewControllers direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
     }
     return self;
 }
-
 
 - (void)viewDidLoad
 {
@@ -59,28 +66,29 @@
 	// Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
     
-    self.pageViewController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
-    
-    self.pageViewController.delegate = self;
-    self.pageViewController.dataSource = self;
-    
-    NSRange theRange = { .location = 1, .length = 1 };
-    if (self.pageViewController.spineLocation == UIPageViewControllerSpineLocationMid)
-    {
-        theRange = (NSRange){ .location = 0, .length = 2 };
-        self.pageViewController.doubleSided = YES;
-    }
-    NSArray *theViewControllers = [self pageViewControllersForRange:theRange];
-    [self.pageViewController setViewControllers:theViewControllers direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
-    
-    [self addChildViewController:self.pageViewController];
-    [self.view addSubview:self.pageViewController.view];
-    [self.pageViewController didMoveToParentViewController:self];
-    self.pageViewController.view.frame = CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height);
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleEntryRequestNotification:) name:kEntryRequestNotification object:nil];
     
      [RPDFReaderToolbarViewController configureDelegate:self];
+}
+
+- (UIPageViewController *)pageViewController
+{
+    if (!_pageViewController) {
+        _pageViewController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
+        
+        _pageViewController.delegate = self;
+        _pageViewController.dataSource = self;
+        
+        [self addChildViewController:_pageViewController];
+        [self.view.subviews enumerateObjectsUsingBlock:^(UIView *view, NSUInteger idx, BOOL *stop) {
+            [view removeFromSuperview];
+        }];
+        [self.view addSubview:_pageViewController.view];
+        [_pageViewController didMoveToParentViewController:self];
+        _pageViewController.view.frame = CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height);
+    }
+    return _pageViewController;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -123,10 +131,17 @@
 - (void)turnToPage:(NSInteger)page
 {
     RPDFPageViewController *pageVC = [self pageViewControllerAtPage:page];
-    
+//    NSArray *pageVCs = [self pageViewControllersForRange:NSMakeRange(1, page)] ;
     NSArray *pageNumbers = [self.pageViewController.viewControllers valueForKey:@"pageNumber"];
+    NSUInteger foundIdx = [pageNumbers indexOfObject:@(page) inSortedRange:NSMakeRange(0, pageNumbers.count) options:nil usingComparator:^NSComparisonResult(id a, id b) {
+        return [a compare:b];
+    }];
+    if (foundIdx != NSNotFound) {
+        return;
+    }
     NSInteger maxPageNo = [[pageNumbers valueForKeyPath:@"@max.intValue"] integerValue];
-    [self.pageViewController setViewControllers:@[pageVC] direction: page > maxPageNo ?   UIPageViewControllerNavigationDirectionForward : UIPageViewControllerNavigationDirectionReverse animated:YES completion:nil];
+    self.pageViewController = nil;
+    [self.pageViewController setViewControllers:@[pageVC] direction: page > maxPageNo ? UIPageViewControllerNavigationDirectionForward : UIPageViewControllerNavigationDirectionReverse animated:YES completion:nil];
 }
 
 - (NSArray *)pageViewControllersForRange:(NSRange)inRange
@@ -149,25 +164,30 @@
 #pragma mark - UIPageViewController delegate methods
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController
 {
-    RPDFPageViewController *theViewController = (RPDFPageViewController *)viewController;
-    NSUInteger previousPageNumber  = theViewController.pageNumber - 1;
+    NSArray *pageNumbers = [self.pageViewController.viewControllers valueForKey:@"pageNumber"];
+    NSUInteger previousPageNumber  = [[pageNumbers valueForKeyPath:@"@min.intValue"] integerValue] - 1;
     if (previousPageNumber > self.numberOfPages) {
         return NULL;
     }
-    if (previousPageNumber == 0 && UIInterfaceOrientationIsPortrait(self.interfaceOrientation))
+    NSLog(@"current numbers %@, previous page %d", pageNumbers, previousPageNumber);
+    if (previousPageNumber <= 0 && UIInterfaceOrientationIsPortrait(self.interfaceOrientation))
     {
         return NULL;
     }
+//    self.currentPage = previousPageNumber;
     return [self pageViewControllerAtPage:previousPageNumber];
 }
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController
 {
-    RPDFPageViewController *theViewController = (RPDFPageViewController *)viewController;
-    NSUInteger nextPageNumber =  theViewController.pageNumber + 1;
+    NSArray *pageNumbers = [self.pageViewController.viewControllers valueForKey:@"pageNumber"];
+    NSUInteger nextPageNumber = [[pageNumbers valueForKeyPath:@"@max.intValue"] integerValue] + 1;
+//    NSUInteger nextPageNumber = self.currentPage + 1;
+    NSLog(@"current numbers %@, next page %d", pageNumbers, nextPageNumber);
     if (nextPageNumber > self.numberOfPages) {
         return NULL;
     }
+//    self.currentPage = nextPageNumber;
     return [self pageViewControllerAtPage:nextPageNumber];
     
 }

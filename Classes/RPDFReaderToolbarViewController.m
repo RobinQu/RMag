@@ -12,7 +12,7 @@
 #import "RTOCViewController.h"
 #import "RPDFDocumentOutline.h"
 #import <StackBluriOS/UIImage+StackBlur.h>
-
+#import <QuartzCore/QuartzCore.h>
 
 static const CGFloat kImageBlurRadius = 30.0f;
 

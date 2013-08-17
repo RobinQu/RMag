@@ -34,6 +34,8 @@
     }
     self = [self initWithFrame:frame contentSize:contentSize];
     self.magazineMode = YES;
+    self.scrollView.minimumZoomScale = 0.5f;
+    self.zoomScale = 0.5f;
     return self;
 }
 
@@ -47,7 +49,6 @@
         self.scrollView.showsVerticalScrollIndicator = !magazineMode;
         self.zoomsInOnDoubleTap = !magazineMode;
         self.zoomsOutOnTwoFingerTap = !magazineMode;
-        
         [self didChangeValueForKey:@"magazineMode"];
     }
 }
