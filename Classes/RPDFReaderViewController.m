@@ -18,6 +18,7 @@
 @interface RPDFReaderViewController ()
 {
     CGPDFDocumentRef _PDFDocRef;
+    BOOL shouldToggleStatusBar;
 }
 
 @property (nonatomic, retain) NSURL *documentURL;
@@ -94,7 +95,10 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationSlide];
+    shouldToggleStatusBar = ![[UIApplication sharedApplication] isStatusBarHidden];
+    if (shouldToggleStatusBar) {
+        [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationSlide];
+    }
 }
 
 //- (void)viewDidAppear:(BOOL)animated
@@ -107,7 +111,9 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
+    if (shouldToggleStatusBar) {
+        [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
+    }
 
 }
 

@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
 
   s.author       = { "RobinQu" => "robinqu@gmail.com" }
   s.source       = { :git => "https://github.com/RobinQu/RMag.git", :tag => "#{s.version}" }
-  s.platform     = :ios, '5.0'
+  s.platform     = :ios, '6.0'
 
   s.source_files = 'Classes', 'Classes/**/*.{h,m}'
   s.exclude_files = 'Classes/Exclude'
@@ -25,7 +25,6 @@ Pod::Spec.new do |s|
   s.requires_arc = true
   
   s.dependency 'AFNetworking', '~> 1.3.1'
-  s.dependency 'PSTCollectionView', "~> 1.0.0"
   s.dependency 'DTFoundation',  '~> 1.4.4'
   s.dependency 'MTPDF', '~> 0.0.5'
   s.dependency 'StackBluriOS', '~> 0.0.1'
